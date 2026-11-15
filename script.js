@@ -234,93 +234,64 @@ updateScrollScenes();
 
 const filmScroll = document.querySelector('[data-video-scroll]');
 if (filmScroll) {
-  const mobileLayout = window.matchMedia('(max-width: 760px)').matches;
-  if (mobileLayout) {
-    const mobileClips = [...filmScroll.querySelectorAll('.mobile-film-card video')];
-    mobileClips.forEach((video) => {
-      video.addEventListener('loadedmetadata', () => {
-        const media = video.closest('.mobile-film-media');
-        media.classList.toggle('is-portrait', video.videoHeight > video.videoWidth);
-        media.classList.toggle('is-landscape', video.videoWidth >= video.videoHeight);
-      });
-      video.addEventListener('error', () => video.closest('.mobile-film-card').classList.add('clip-error'));
-    });
-    const clipObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        const video = entry.target;
-        if (entry.isIntersecting) {
-          if (!video.src) {
-            video.src = video.dataset.src;
-            video.load();
-          }
-          video.play().catch(() => {});
-          entry.target.closest('.mobile-film-card').classList.add('clip-active');
-        } else {
-          video.pause();
-          entry.target.closest('.mobile-film-card').classList.remove('clip-active');
-        }
-      });
-    }, { rootMargin: '80px 0px 80px 0px', threshold: 0.25 });
-    mobileClips.forEach((video) => clipObserver.observe(video));
-  } else {
-    const filmStage = filmScroll.querySelector('.film-stage');
-    const filmVideo = filmScroll.querySelector('.film-video');
-    const filmTitle = filmScroll.querySelector('.film-chapter h3');
-    const filmCopy = filmScroll.querySelector('.film-chapter p');
-    const chapters = [
-      { src: 'public/assets/video/web/storia-eventi.mp4', title: 'Le emozioni di un momento.', copy: 'Ci sono attimi che passano in un secondo e meritano di essere rivissuti. Il racconto comincia da lì.' },
-      { src: 'public/assets/video/web/brand-film.mp4', title: 'Una visione prende forma.', copy: 'Ogni progetto ha una personalità. Immagini, suono e ritmo la rendono riconoscibile.' },
-      { src: 'public/assets/video/web/video-social.mp4', title: 'Un’immagine apre una porta.', copy: 'La prima impressione conta: creiamo contenuti che fermano lo sguardo e invitano a conoscere.' },
-      { src: 'public/assets/video/web/produzione-live.mp4', title: 'La tua storia continua.', copy: 'Il video giusto trova il suo spazio tra website, social e campagne, e porta il tuo messaggio più lontano.' }
-    ];
-    let activeChapter = -1;
-    let filmVisible = false;
-    let pendingResume = null;
-    filmVideo.addEventListener('loadedmetadata', () => {
-      filmStage.classList.toggle('is-portrait', filmVideo.videoHeight > filmVideo.videoWidth);
-    });
-    function updateFilmChapter() {
-      if (!filmVisible) return;
-      const rect = filmScroll.getBoundingClientRect();
-      const travel = Math.max(1, filmScroll.offsetHeight - window.innerHeight);
-      const progress = Math.max(0, Math.min(1, -rect.top / travel));
-      filmStage.style.setProperty('--film-progress', progress.toFixed(3));
-      const index = Math.min(chapters.length - 1, Math.floor(progress * chapters.length));
-      if (index !== activeChapter) {
-        activeChapter = index;
-        const chapter = chapters[index];
-        filmTitle.textContent = chapter.title;
-        filmCopy.textContent = chapter.copy;
-        filmVideo.style.opacity = '0.15';
-        if (pendingResume) filmVideo.removeEventListener('canplay', pendingResume);
-        if (filmVideo.getAttribute('src') !== chapter.src) {
-          filmVideo.src = chapter.src;
-          filmVideo.load();
-        }
-        pendingResume = () => {
-          if (filmVideo.getAttribute('src') !== chapter.src || !filmVisible) return;
-          filmVideo.play().catch(() => {});
-          filmVideo.style.opacity = '';
-          filmScroll.classList.remove('film-video-error');
-          filmVideo.removeEventListener('canplay', pendingResume);
-          pendingResume = null;
-        };
-        filmVideo.addEventListener('canplay', pendingResume);
+  const filmStage = filmScroll.querySelector('.film-stage');
+  const filmVideo = filmScroll.querySelector('.film-video');
+  const filmTitle = filmScroll.querySelector('.film-chapter h3');
+  const filmCopy = filmScroll.querySelector('.film-chapter p');
+  const chapters = [
+    { src: 'public/assets/video/web/storia-eventi.mp4', title: 'Le emozioni di un momento.', copy: 'Ci sono attimi che passano in un secondo e meritano di essere rivissuti. Il racconto comincia da lì.' },
+    { src: 'public/assets/video/web/brand-film.mp4', title: 'Una visione prende forma.', copy: 'Ogni progetto ha una personalità. Immagini, suono e ritmo la rendono riconoscibile.' },
+    { src: 'public/assets/video/web/video-social.mp4', title: 'Un’immagine apre una porta.', copy: 'La prima impressione conta: creiamo contenuti che fermano lo sguardo e invitano a conoscere.' },
+    { src: 'public/assets/video/web/produzione-live.mp4', title: 'La tua storia continua.', copy: 'Il video giusto trova il suo spazio tra website, social e campagne, e porta il tuo messaggio più lontano.' }
+  ];
+  let activeChapter = -1;
+  let filmVisible = false;
+  let pendingResume = null;
+  filmVideo.addEventListener('loadedmetadata', () => {
+    filmStage.classList.toggle('is-portrait', filmVideo.videoHeight > filmVideo.videoWidth);
+  });
+  function updateFilmChapter() {
+    if (!filmVisible) return;
+    const rect = filmScroll.getBoundingClientRect();
+    const travel = Math.max(1, filmScroll.offsetHeight - window.innerHeight);
+    const progress = Math.max(0, Math.min(1, -rect.top / travel));
+    filmStage.style.setProperty('--film-progress', progress.toFixed(3));
+    const index = Math.min(chapters.length - 1, Math.floor(progress * chapters.length));
+    if (index !== activeChapter) {
+      activeChapter = index;
+      const chapter = chapters[index];
+      filmTitle.textContent = chapter.title;
+      filmCopy.textContent = chapter.copy;
+      filmVideo.style.opacity = '0.15';
+      if (pendingResume) filmVideo.removeEventListener('canplay', pendingResume);
+      if (filmVideo.getAttribute('src') !== chapter.src) {
+        filmVideo.src = chapter.src;
+        filmVideo.load();
       }
-    }
-    const filmObserver = new IntersectionObserver(([entry]) => {
-      filmVisible = entry.isIntersecting;
-      if (filmVisible) {
-        updateFilmChapter();
+      pendingResume = () => {
+        if (filmVideo.getAttribute('src') !== chapter.src || !filmVisible) return;
         filmVideo.play().catch(() => {});
-      } else filmVideo.pause();
-    }, { threshold: 0.01 });
-    filmObserver.observe(filmScroll);
-    filmVideo.addEventListener('error', () => filmScroll.classList.add('film-video-error'));
-    window.addEventListener('scroll', updateFilmChapter, { passive: true });
-    window.addEventListener('resize', updateFilmChapter, { passive: true });
-    updateFilmChapter();
+        filmVideo.style.opacity = '';
+        filmScroll.classList.remove('film-video-error');
+        filmVideo.removeEventListener('canplay', pendingResume);
+        pendingResume = null;
+      };
+      filmVideo.addEventListener('canplay', pendingResume);
+      if (filmVideo.readyState >= 3) pendingResume();
+    }
   }
+  const filmObserver = new IntersectionObserver(([entry]) => {
+    filmVisible = entry.isIntersecting;
+    if (filmVisible) {
+      updateFilmChapter();
+      filmVideo.play().catch(() => {});
+    } else filmVideo.pause();
+  }, { threshold: 0.01 });
+  filmObserver.observe(filmScroll);
+  filmVideo.addEventListener('error', () => filmScroll.classList.add('film-video-error'));
+  window.addEventListener('scroll', updateFilmChapter, { passive: true });
+  window.addEventListener('resize', updateFilmChapter, { passive: true });
+  updateFilmChapter();
 }
 
 // Privacy controls: optional services are never requested before affirmative consent.
