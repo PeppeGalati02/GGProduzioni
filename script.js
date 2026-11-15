@@ -5,7 +5,7 @@ const observer = new IntersectionObserver((entries) => {
       observer.unobserve(entry.target);
     }
   });
-}, { rootMargin: '0px 0px 42% 0px', threshold: 0.01 });
+}, { rootMargin: '0px 0px 90% 0px', threshold: 0.01 });
 
 document.querySelectorAll('.reveal').forEach((element) => observer.observe(element));
 

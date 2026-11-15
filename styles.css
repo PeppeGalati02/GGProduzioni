@@ -567,3 +567,29 @@ body{background:#fffaf4!important}
 .site-footer{background:#8f2d0a!important}
 .reveal{transition-duration:.98s,1.02s,.9s!important}
 @media(max-width:760px){.process-step,.process-step:nth-child(1),.process-step:nth-child(2),.process-step:nth-child(3){background:transparent!important}.story-copy>p{color:#554a43!important}}
+
+/* Replace pale section panels with a unified espresso canvas and high-contrast ivory type. */
+:root{--paper:#211c1a;--ink:#fff8ef;--muted:#c5b8af;--line:rgba(255,248,239,.16)}
+body{background:#211c1a!important;color:#fff8ef}
+.story,.story-sticky{background:#211c1a!important;color:#fff8ef}
+.story-copy h2{color:#fff8ef!important}.story-copy h2 em{color:#ffd66f!important}
+.story-kicker,.story-side-note{color:#ffad7b!important}.story-copy>p{color:#e1d4cc!important}
+.process{background:#211c1a!important;color:#fff8ef}
+.process-step,.process-step:nth-child(1),.process-step:nth-child(2),.process-step:nth-child(3){background:#302723!important;box-shadow:none!important}
+.process-heading h2,.process-text h3{color:#fff8ef!important}
+.process-heading>p,.process-text p{color:#e1d4cc!important}
+.process-heading .section-kicker,.process-text>span{color:#ffad7b!important}
+.services,.work,.instagram-preview{background:#211c1a!important;color:#fff8ef}
+.services-heading h2,.work-heading h2,.instagram-copy h2{color:#fff8ef!important}
+.services-heading>p,.work-intro,.instagram-description{color:#e1d4cc!important}
+.service-brand{background:linear-gradient(145deg,#38302b,#28211e)!important;color:#fff8ef!important;border:1px solid #ffffff20}
+.work-statement{background:linear-gradient(145deg,#382d27,#29221f)!important;color:#fff8ef;border:1px solid #ffffff20;box-shadow:none}
+.work-statement>span{color:#ffad7b!important}.work-statement p{color:#fff8ef}.work-statement p em{color:#ffd66f!important}
+.instagram-preview:before{border-color:#ffad7b33;box-shadow:0 0 0 36px #ffad7b08,0 0 0 76px #ffad7b06}
+.services .section-kicker,.work .section-kicker,.instagram-copy .section-kicker{color:#ffad7b!important}
+.work-heading h2 em,.work-intro em,.instagram-copy h2 em,.instagram-overline{color:#ffad7b!important}
+.work-statement .text-link{color:#fff8ef;border-color:#ffad7b}
+.work-statement .text-link span{color:#ffd66f}
+.art-brand{background:linear-gradient(135deg,#49342b,#30231e 58%,#a84421)!important}
+.reveal{transition-duration:.9s,.95s,.82s!important}
+@media(max-width:760px){.process-step,.process-step:nth-child(1),.process-step:nth-child(2),.process-step:nth-child(3){background:#302723!important}.process-text h3{color:#fff8ef!important}.process-text p{color:#e1d4cc!important}}
