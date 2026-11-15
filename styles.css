@@ -519,3 +519,14 @@ body{background:#211c1a}
  .story{padding-top:0!important}
  .story-sticky{padding-top:34px!important;padding-bottom:12px!important}
 }
+
+/* Preserve full-frame footage on desktop and match mobile cards to each clip's format. */
+@media(min-width:761px){.film-media{transform:translateY(-50%)!important}}
+@media(max-width:760px){
+ .mobile-film-media{aspect-ratio:16/9;background:transparent;box-shadow:0 15px 36px #48251b25}
+ .mobile-film-media video{object-fit:cover;object-position:center}
+ .mobile-film-media.is-portrait{width:min(100%,44svh);aspect-ratio:9/16;margin-inline:auto}
+ .mobile-film-media.is-portrait video{object-fit:contain}
+ .story-copy>p,.process-text p,.mobile-film-copy p{font-size:12px;line-height:1.7}
+ .story-copy .text-link{font-size:11px}
+}

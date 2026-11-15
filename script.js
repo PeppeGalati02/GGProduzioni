@@ -240,7 +240,14 @@ if (filmScroll) {
   const mobileLayout = window.matchMedia('(max-width: 760px)').matches;
   if (mobileLayout) {
     const mobileClips = [...filmScroll.querySelectorAll('.mobile-film-card video')];
-    mobileClips.forEach((video) => video.addEventListener('error', () => video.closest('.mobile-film-card').classList.add('clip-error')));
+    mobileClips.forEach((video) => {
+      video.addEventListener('loadedmetadata', () => {
+        const media = video.closest('.mobile-film-media');
+        media.classList.toggle('is-portrait', video.videoHeight > video.videoWidth);
+        media.classList.toggle('is-landscape', video.videoWidth >= video.videoHeight);
+      });
+      video.addEventListener('error', () => video.closest('.mobile-film-card').classList.add('clip-error'));
+    });
     const clipObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         const video = entry.target;
