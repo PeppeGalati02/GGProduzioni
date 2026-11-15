@@ -261,7 +261,6 @@ if (filmScroll) {
   } else {
     const filmStage = filmScroll.querySelector('.film-stage');
     const filmVideo = filmScroll.querySelector('.film-video');
-    const filmCount = filmScroll.querySelector('.film-count');
     const filmTitle = filmScroll.querySelector('.film-chapter h3');
     const filmCopy = filmScroll.querySelector('.film-chapter p');
     const chapters = [
@@ -286,7 +285,6 @@ if (filmScroll) {
       if (index !== activeChapter) {
         activeChapter = index;
         const chapter = chapters[index];
-        filmCount.textContent = `0${index + 1} / 0${chapters.length}`;
         filmTitle.textContent = chapter.title;
         filmCopy.textContent = chapter.copy;
         filmVideo.style.opacity = '0.15';
