@@ -638,3 +638,41 @@ body{background:var(--dark-canvas)!important}
  .scene-opening .manifesto-art{right:3vw!important;top:auto!important;bottom:auto!important;width:min(78%,360px)!important;height:auto!important;aspect-ratio:1.15;margin:24px 0 0 auto;position:relative}
 }
 @media(min-width:761px) and (max-width:1020px){.scene-opening .manifesto-copy{max-width:44vw!important;margin-left:0!important}.scene-opening .manifesto-art{right:7vw!important;width:33%!important}}
+
+/* Continuous color fields across the hero/manifesto and contact/footer boundaries. */
+.hero{
+  background:
+    radial-gradient(ellipse at 78% 83%,rgba(247,116,38,.45),transparent 32%),
+    radial-gradient(ellipse at 14% 18%,rgba(239,85,12,.6),transparent 45%),
+    linear-gradient(120deg,#a9340b 0%,#8f2d0a 45%,#b6400d 100%)!important;
+}
+.manifesto,.scene-opening{
+  background:
+    radial-gradient(ellipse at 78% 83%,rgba(247,116,38,.45),transparent 32%),
+    radial-gradient(ellipse at 14% 18%,rgba(239,85,12,.6),transparent 45%),
+    linear-gradient(120deg,#a9340b 0%,#8f2d0a 45%,#b6400d 100%)!important;
+}
+.hero{padding-bottom:0!important}
+.manifesto{margin-top:0!important;padding-top:0!important;min-height:calc(100svh - 1px)!important}
+.scene-opening{min-height:inherit;background:transparent!important}
+.hero-fade{height:clamp(220px,34svh,390px)!important;background:linear-gradient(to bottom,transparent 0%,rgba(169,52,11,.35) 45%,#a9340b 100%)!important}
+.contact{
+  margin-bottom:0!important;
+  background:
+    radial-gradient(ellipse at 85% 18%,rgba(255,189,114,.28),transparent 31%),
+    radial-gradient(ellipse at 10% 100%,rgba(126,38,9,.34),transparent 45%),
+    linear-gradient(125deg,#a9340b 0%,#d9521d 58%,#bd4318 100%)!important;
+}
+.site-footer{
+  margin-top:0!important;
+  background:
+    radial-gradient(ellipse at 85% 18%,rgba(255,189,114,.28),transparent 31%),
+    radial-gradient(ellipse at 10% 100%,rgba(126,38,9,.34),transparent 45%),
+    linear-gradient(125deg,#a9340b 0%,#d9521d 58%,#bd4318 100%)!important;
+}
+.site-footer:before{background:radial-gradient(ellipse at 85% 18%,rgba(255,189,114,.24),transparent 34%)!important}
+@media(max-width:760px){
+ .hero{padding-bottom:0!important}
+ .manifesto{padding-top:0!important;min-height:auto!important}
+ .scene-opening{min-height:0!important}
+}
