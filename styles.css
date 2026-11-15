@@ -381,6 +381,15 @@ body{background:#fffaf4;color:var(--ink)}.site-header{mix-blend-mode:normal}.sit
 @media(max-width:760px){.ig-tile>i.ig-video-mark{width:20px;height:20px;top:7px;right:7px;border-radius:7px}.ig-video-mark svg{width:11px;height:11px}.ig-tab svg{width:18px;height:18px}}
 @media(prefers-reduced-motion:reduce){.ig-tab svg,.ig-video-mark,.ig-profile-buttons>a{transition:none!important}}
 
+/* Video sound is opt-in: browsers require a direct user gesture before audio can play. */
+.film-sound-toggle{position:absolute;z-index:5;top:clamp(24px,5vh,52px);right:clamp(24px,6vw,84px);display:flex;align-items:center;gap:8px;padding:11px 15px;border:1px solid #fff7ef66;border-radius:999px;background:#21171388;color:#fff7ef;font:700 9px/1 var(--font);letter-spacing:.12em;backdrop-filter:blur(12px);cursor:pointer;transition:background .25s,border-color .25s,transform .25s,color .25s}
+.film-sound-toggle:hover{transform:translateY(-2px);border-color:#ffd27a;background:#211713c9}
+.film-sound-toggle.is-on{border-color:#ffd27a;background:#f2a04b;color:#271812;box-shadow:0 0 24px #ffbc6355}
+.mobile-sound-toggle{position:absolute;z-index:4;top:13px;right:13px;width:42px;height:42px;display:grid;place-items:center;border:1px solid #ffffff8c;border-radius:50%;background:#211713a8;color:#fff7ef;font:600 20px/1 var(--font);backdrop-filter:blur(10px);cursor:pointer;transition:background .22s,border-color .22s,transform .22s}
+.mobile-sound-toggle:hover,.mobile-sound-toggle.is-on{transform:scale(1.05);border-color:#ffd27a;background:#e76e2d;color:#fff7ef;box-shadow:0 0 22px #ff9d4d70}
+@media(max-width:760px){.film-sound-toggle{display:none}.mobile-sound-toggle{width:38px;height:38px;top:11px;right:11px;font-size:18px}}
+@media(prefers-reduced-motion:reduce){.film-sound-toggle,.mobile-sound-toggle{transition:none!important}}
+
 /* A clearer follow CTA with a recognizable Instagram mark and tactile hover. */
 .instagram-cta{position:relative;isolation:isolate;overflow:hidden;display:inline-flex;align-items:center;gap:12px;padding:7px 8px 7px 9px;border:1px solid #f89664;border-radius:999px;background:linear-gradient(110deg,#ef7332 0%,#d94d1d 58%,#bd3f19 100%);color:#fffaf4;box-shadow:0 10px 25px #b94a2638,0 0 0 1px #ffffff20 inset;transition:transform .28s cubic-bezier(.2,.8,.2,1),background .28s,box-shadow .3s}
 .instagram-cta:before{content:'';position:absolute;z-index:-1;inset:0;background:linear-gradient(105deg,transparent 20%,#ffffff48 48%,transparent 72%);transform:translateX(-130%);transition:transform .65s cubic-bezier(.2,.8,.2,1)}

@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=film-caption-spacing-20261115" />
+  <link rel="stylesheet" href="styles.css?v=video-audio-controls-20261115" />
   <link rel="stylesheet" href="consent.css" />
 </head>
 <body>
@@ -59,16 +59,17 @@
     <section class="film-scroll" id="racconti" data-video-scroll aria-label="Storie in movimento">
       <div class="film-stage">
         <div class="film-media"><video class="film-video" muted playsinline loop preload="none" aria-label="Video di un progetto GG Produzioni"></video><div class="film-vignette"></div><div class="film-grain"></div></div>
+        <button class="film-sound-toggle" type="button" aria-pressed="false" aria-label="Attiva l’audio dei video">♪ <span>AUDIO OFF</span></button>
         <div class="film-heading"><span>GG PRODUZIONI · STORIE IN MOVIMENTO</span><h2>Ogni progetto<br />ha il suo <em>ritmo.</em></h2></div>
         <div class="film-chapter" aria-live="polite"><h3>Le emozioni di un evento.</h3><p>Non solo la giornata. Le persone, l’attesa, quello che vorrai ricordare.</p></div>
         <div class="film-progress"><i></i></div>
         <div class="film-scroll-cue">CONTINUA A SCORRERE <span>↓</span></div>
       </div>
       <div class="mobile-film-list" aria-label="Video GG Produzioni">
-        <article class="mobile-film-card reveal"><div class="mobile-film-media"><video muted playsinline loop preload="none" data-src="public/assets/video/web/storia-eventi.mp4" aria-label="Video di un evento"></video><span>EMOZIONE</span></div><div class="mobile-film-copy"><h3>Le emozioni di un momento.</h3><p>Ci sono attimi che passano in un secondo e meritano di essere rivissuti.</p></div></article>
-        <article class="mobile-film-card reveal"><div class="mobile-film-media"><video muted playsinline loop preload="none" data-src="public/assets/video/web/brand-film.mp4" aria-label="Video per un brand"></video><span>IDENTITÀ</span></div><div class="mobile-film-copy"><h3>Una visione prende forma.</h3><p>Ogni progetto ha una personalità. Immagini, suono e ritmo la rendono riconoscibile.</p></div></article>
-        <article class="mobile-film-card reveal"><div class="mobile-film-media"><video muted playsinline loop preload="none" data-src="public/assets/video/web/video-social.mp4" aria-label="Video per i social"></video><span>ATTENZIONE</span></div><div class="mobile-film-copy"><h3>Un’immagine apre una porta.</h3><p>Contenuti che fermano lo sguardo e invitano a conoscere.</p></div></article>
-        <article class="mobile-film-card reveal"><div class="mobile-film-media"><video muted playsinline loop preload="none" data-src="public/assets/video/web/produzione-live.mp4" aria-label="Video di una produzione"></video><span>MOVIMENTO</span></div><div class="mobile-film-copy"><h3>La tua storia continua.</h3><p>Un racconto pronto a vivere tra website, social e campagne.</p></div></article>
+        <article class="mobile-film-card reveal"><div class="mobile-film-media"><video muted playsinline loop preload="none" data-src="public/assets/video/web/storia-eventi.mp4" aria-label="Video di un evento"></video><span>EMOZIONE</span><button class="mobile-sound-toggle" type="button" aria-pressed="false" aria-label="Attiva l’audio dei video">♪</button></div><div class="mobile-film-copy"><h3>Le emozioni di un momento.</h3><p>Ci sono attimi che passano in un secondo e meritano di essere rivissuti.</p></div></article>
+        <article class="mobile-film-card reveal"><div class="mobile-film-media"><video muted playsinline loop preload="none" data-src="public/assets/video/web/brand-film.mp4" aria-label="Video per un brand"></video><span>IDENTITÀ</span><button class="mobile-sound-toggle" type="button" aria-pressed="false" aria-label="Attiva l’audio dei video">♪</button></div><div class="mobile-film-copy"><h3>Una visione prende forma.</h3><p>Ogni progetto ha una personalità. Immagini, suono e ritmo la rendono riconoscibile.</p></div></article>
+        <article class="mobile-film-card reveal"><div class="mobile-film-media"><video muted playsinline loop preload="none" data-src="public/assets/video/web/video-social.mp4" aria-label="Video per i social"></video><span>ATTENZIONE</span><button class="mobile-sound-toggle" type="button" aria-pressed="false" aria-label="Attiva l’audio dei video">♪</button></div><div class="mobile-film-copy"><h3>Un’immagine apre una porta.</h3><p>Contenuti che fermano lo sguardo e invitano a conoscere.</p></div></article>
+        <article class="mobile-film-card reveal"><div class="mobile-film-media"><video muted playsinline loop preload="none" data-src="public/assets/video/web/produzione-live.mp4" aria-label="Video di una produzione"></video><span>MOVIMENTO</span><button class="mobile-sound-toggle" type="button" aria-pressed="false" aria-label="Attiva l’audio dei video">♪</button></div><div class="mobile-film-copy"><h3>La tua storia continua.</h3><p>Un racconto pronto a vivere tra website, social e campagne.</p></div></article>
       </div>
     </section>
 
@@ -189,7 +190,7 @@
       <a class="cookie-policy-link" href="privacy.html">Informativa completa privacy e cookie <span>↗</span></a>
     </form>
   </dialog>
-  <script src="script.js?v=mobile-closing-flow-20261115"></script>
+  <script src="script.js?v=video-audio-controls-20261115"></script>
   <div class="pointer-aura" aria-hidden="true"></div>
 </body>
 </html>
