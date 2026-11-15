@@ -787,6 +787,22 @@ body{background:var(--gg-brown-field)!important}
   .mobile-outro-copy h2{font-size:clamp(32px,9.2vw,40px)}
 }
 
+/* Keep the chapter caption visually tied to the changing video frame. */
+@media(min-width:761px){
+  .film-stage:not(.is-portrait) .film-chapter{bottom:23%!important}
+  .film-stage.is-portrait .film-chapter{bottom:11%!important}
+  .film-stage .film-chapter{transition:bottom .65s cubic-bezier(.22,.72,.18,1),opacity .35s,transform .45s!important}
+}
+@media(max-width:760px){
+  .film-stage:not(.is-portrait) .film-chapter{bottom:14svh!important}
+  .film-stage.is-portrait .film-chapter{bottom:3svh!important}
+  .film-stage .film-chapter{transition:bottom .65s cubic-bezier(.22,.72,.18,1),opacity .35s,transform .45s!important}
+}
+@media(max-width:760px) and (max-height:740px){
+  .film-stage:not(.is-portrait) .film-chapter{bottom:12svh!important}
+  .film-stage.is-portrait .film-chapter{bottom:2svh!important}
+}
+
 /* Give each service illustration its own clear breathing room before the copy. */
 .service-card .service-art{margin-bottom:28px!important}
 .service-card-copy{padding-top:8px}
