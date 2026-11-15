@@ -724,3 +724,7 @@ body{background:var(--gg-brown-field)!important}
   .story-sticky{padding-bottom:0!important}
   .film-scroll{padding-top:0!important}
 }
+
+/* A small, intentional breathing space before the opening video card. */
+.mobile-film-card:first-child{padding-top:clamp(22px,4svh,38px)}
+@media(max-width:760px){.mobile-film-card:first-child{padding-top:clamp(24px,4.5svh,42px)}}
