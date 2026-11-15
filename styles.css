@@ -676,3 +676,22 @@ body{background:var(--dark-canvas)!important}
  .manifesto{padding-top:0!important;min-height:auto!important}
  .scene-opening{min-height:0!important}
 }
+
+/* One continuous visual system: shared orange and espresso gradients, no hard section seams. */
+:root{
+  --gg-orange-field:radial-gradient(ellipse at 82% 18%,rgba(255,190,112,.32),transparent 34%),radial-gradient(ellipse at 12% 88%,rgba(113,35,9,.24),transparent 43%),linear-gradient(128deg,#a9340b 0%,#c94c17 52%,#ad3c11 100%);
+  --gg-brown-field:radial-gradient(ellipse at 88% 16%,rgba(211,105,54,.18),transparent 36%),radial-gradient(ellipse at 10% 88%,rgba(129,71,47,.18),transparent 42%),linear-gradient(128deg,#211a18 0%,#30231f 50%,#241b18 100%);
+}
+body{background:var(--gg-brown-field)!important}
+.hero,.manifesto,.scene-opening,.contact{background:var(--gg-orange-field)!important}
+.story,.story-sticky,.process,.services,.work,.instagram-preview,.site-footer{background:var(--gg-brown-field)!important}
+.story-sticky{background-color:transparent!important}
+.film-scroll,.film-stage{background:var(--gg-brown-field)!important}
+.hero-fade{background:linear-gradient(to bottom,transparent 0%,rgba(169,52,11,.25) 48%,#a9340b 100%)!important}
+.site-footer{position:relative;isolation:isolate;overflow:hidden;color:#fff8ef;margin-top:0!important}
+.site-footer:before{content:'';position:absolute;z-index:-1;inset:0;pointer-events:none;background:radial-gradient(ellipse at 86% 12%,rgba(211,105,54,.17),transparent 36%),radial-gradient(ellipse at 10% 100%,rgba(129,71,47,.18),transparent 42%);filter:blur(8px)}
+.hero,.manifesto,.story,.film-scroll,.process,.services,.work,.instagram-preview,.contact,.site-footer{border:0!important;box-shadow:none!important}
+.hero,.manifesto,.story,.film-scroll,.process,.services,.work,.instagram-preview,.contact,.site-footer{margin-block:0!important}
+.hero{padding-bottom:0!important}
+.manifesto{padding-top:0!important}
+@media(max-width:760px){.manifesto{padding-top:0!important}.site-footer:before{filter:blur(5px)}}
