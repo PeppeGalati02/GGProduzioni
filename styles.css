@@ -477,3 +477,17 @@ body{background:#211c1a}
 .process-step{min-height:clamp(420px,58svh,620px)}
 .manifesto .section-kicker{color:#fff3e7}
 @media(max-width:760px){.manifesto,.story{min-height:0}.film-scroll{height:auto!important;min-height:0}.process-step{min-height:0}}
+
+/* Keep section colors intact while removing the extra visual and scroll breaks. */
+.story:after,.film-scroll:after,.process:after,.services:after,.work:after,.contact:after{display:none!important;content:none!important}
+.story,.film-scroll,.process,.services,.work,.contact{box-shadow:none!important}
+.manifesto{min-height:108svh}
+.story{min-height:112svh}
+.film-scroll{height:175svh!important;min-height:0!important}
+.process-step,.process-step:nth-child(1),.process-step:nth-child(2),.process-step:nth-child(3){background:#35251f!important;box-shadow:none!important}
+.process-text h3{color:#fff8ef!important}
+.process-text p{color:#e0d1c7!important}
+.process-heading .section-kicker,.process-text>span{color:#ffb17f!important}
+.process-heading>p{color:#e0d1c7!important}
+.manifesto .section-kicker{color:#fff3e7!important}
+@media(max-width:760px){.manifesto,.story{min-height:0!important}.story-sticky{padding-bottom:28px!important}.film-scroll{height:auto!important;min-height:0!important;padding-top:28px!important}.process-step,.process-step:nth-child(1),.process-step:nth-child(2),.process-step:nth-child(3){background:transparent!important}.process-text h3{color:#fff8ef!important}.process-text p{color:#e0d1c7!important}}
