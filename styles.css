@@ -491,3 +491,16 @@ body{background:#211c1a}
 .process-heading>p{color:#e0d1c7!important}
 .manifesto .section-kicker{color:#fff3e7!important}
 @media(max-width:760px){.manifesto,.story{min-height:0!important}.story-sticky{padding-bottom:28px!important}.film-scroll{height:auto!important;min-height:0!important;padding-top:28px!important}.process-step,.process-step:nth-child(1),.process-step:nth-child(2),.process-step:nth-child(3){background:transparent!important}.process-text h3{color:#fff8ef!important}.process-text p{color:#e0d1c7!important}}
+
+/* Blend only the opening, personal story, and video transition; preserve later section colors. */
+.story,.story-sticky{background:linear-gradient(180deg,#a9340b 0%,#30251f 38%,#291b16 100%)!important}
+.film-scroll,.film-stage{background:#291b16!important}
+.film-media{transform:scale(1)!important;border-radius:0!important}
+.manifesto{min-height:102svh}
+.story{min-height:100svh}
+@media(max-width:760px){
+ .manifesto,.story{min-height:0!important}
+ .story-sticky{background:linear-gradient(180deg,#a9340b 0%,#30251f 34%,#291b16 100%)!important;padding-bottom:12px!important}
+ .film-scroll{padding-top:12px!important}
+ .film-media{transform:none!important}
+}
