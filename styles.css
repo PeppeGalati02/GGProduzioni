@@ -736,3 +736,31 @@ body{background:var(--gg-brown-field)!important}
   .film-scroll{padding-top:0!important}
   .mobile-film-card:first-child{padding-top:clamp(24px,4.5svh,42px)!important}
 }
+
+/* Give each service illustration its own clear breathing room before the copy. */
+.service-card .service-art{margin-bottom:28px!important}
+.service-card-copy{padding-top:8px}
+.service-card-copy h3{margin:0 0 14px!important}
+.service-card-copy p{line-height:1.72}
+@media(max-width:760px){
+  .service-card{grid-template-rows:auto auto auto!important;align-content:start}
+  .service-card .service-art{height:clamp(190px,54vw,250px)!important;min-height:0!important;margin:14px 0 27px!important}
+  .service-card-copy{margin-top:0!important;padding-top:8px!important}
+  .service-card-copy h3{margin:0 0 13px!important}
+}
+
+/* Replace the opening manifesto's strong drift and fade with a restrained scroll reveal. */
+.scene-opening:before{transform:scale(calc(.985 + var(--progress)*.015))!important}
+.scene-opening .manifesto-copy{
+  transform:translate3d(0,calc((1 - var(--progress))*18px),0)!important;
+  opacity:calc(.88 + var(--progress)*.12)!important;
+  filter:blur(calc((1 - var(--progress))*1px));
+}
+.scene-opening .manifesto-art{
+  transform:translateY(calc((1 - var(--progress))*12px)) scale(calc(.97 + var(--progress)*.03))!important;
+  opacity:calc(.9 + var(--progress)*.1)!important;
+}
+.scene-opening .viewfinder{transform:rotate(calc(-2deg + var(--progress)*2deg))!important}
+.scene-opening .manifesto-sun{transform:scale(calc(.97 + var(--progress)*.03))!important;filter:blur(1px)!important}
+.scene-opening .manifesto-index{opacity:calc(.75 + var(--progress)*.25)!important}
+@media(max-width:760px){.scene-opening .manifesto-copy{filter:none!important}}
