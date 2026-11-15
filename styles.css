@@ -807,3 +807,32 @@ body{background:var(--gg-brown-field)!important}
 @media(prefers-reduced-motion:reduce){
   .scene-opening .manifesto-copy.reveal,.scene-opening>.section-kicker.reveal,.scene-opening .manifesto-art{opacity:1!important;transform:none!important;transition:none!important}
 }
+
+/* Use Giuseppe's new on-set photo and animate the copy and still as one sequence. */
+.scene-opening .manifesto-copy.reveal{transform:translate3d(0,16px,0)!important;transition:opacity .72s ease,transform .82s cubic-bezier(.2,.75,.25,1)!important}
+.scene-opening .manifesto-copy.reveal.visible{transform:translate3d(0,0,0)!important}
+.scene-opening .manifesto-copy .manifesto-pretitle,
+.scene-opening .manifesto-copy h2,
+.scene-opening .manifesto-copy .manifesto-description{opacity:0;transform:translateY(10px);transition:opacity .65s ease,transform .75s cubic-bezier(.2,.75,.25,1)}
+.scene-opening .manifesto-copy.visible .manifesto-pretitle{opacity:1;transform:none;transition-delay:.08s}
+.scene-opening .manifesto-copy.visible h2{opacity:1;transform:none;transition-delay:.16s}
+.scene-opening .manifesto-copy.visible .manifesto-description{opacity:1;transform:none;transition-delay:.25s}
+.scene-opening .manifesto-art{transform:translate3d(20px,0,0)!important;transition:opacity .7s ease,transform .9s cubic-bezier(.2,.75,.25,1)!important}
+.scene-opening .manifesto-art.in-view{transform:translate3d(0,0,0)!important}
+.manifesto-still{width:min(100%,510px);height:min(55svh,440px);aspect-ratio:3/2;border-color:rgba(255,232,205,.6);border-radius:7px}
+.manifesto-still img{object-position:center 45%;clip-path:inset(0 100% 0 0 round 7px);transform:scale(1.045);transition:clip-path 1.05s cubic-bezier(.22,.72,.18,1) .12s,transform 1.25s cubic-bezier(.2,.75,.25,1) .12s}
+.manifesto-art.in-view .manifesto-still img{clip-path:inset(0 0 0 0 round 7px);transform:scale(1)}
+.manifesto-still-top,.manifesto-still-bottom{opacity:0;transform:translateY(9px);transition:opacity .55s ease,transform .65s cubic-bezier(.2,.75,.25,1)}
+.manifesto-art.in-view .manifesto-still-top{opacity:1;transform:none;transition-delay:.42s}
+.manifesto-art.in-view .manifesto-still-bottom{opacity:1;transform:none;transition-delay:.58s}
+@media(max-width:760px){
+  .scene-opening .manifesto-art{transform:translate3d(0,15px,0)!important}
+  .scene-opening .manifesto-art.in-view{transform:translate3d(0,0,0)!important}
+  .scene-opening .manifesto-art{width:min(90%,390px)!important;aspect-ratio:3/2!important;margin-top:22px}
+  .manifesto-still{height:100%;width:100%;aspect-ratio:auto}
+  .scene-opening .manifesto-caption{display:none}
+}
+@media(prefers-reduced-motion:reduce){
+  .scene-opening .manifesto-copy .manifesto-pretitle,.scene-opening .manifesto-copy h2,.scene-opening .manifesto-copy .manifesto-description,
+  .manifesto-still img,.manifesto-still-top,.manifesto-still-bottom{opacity:1;transform:none;clip-path:none;transition:none}
+}
