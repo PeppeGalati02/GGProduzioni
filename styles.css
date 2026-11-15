@@ -706,3 +706,12 @@ body{background:var(--gg-brown-field)!important}
 
 /* Remove the thin progress divider at the portrait-to-video transition. */
 .story-sticky:after{content:none!important;display:none!important}
+
+/* Give the hero signature a little more breathing room before the manifesto. */
+.hero{height:auto!important;min-height:max(100svh,900px)!important;padding-bottom:clamp(150px,20svh,230px)!important}
+.hero-side{bottom:clamp(68px,9svh,100px)!important}
+.manifesto{margin-top:0!important}
+@media(max-width:760px){
+  .hero{min-height:max(92svh,700px)!important;padding-bottom:clamp(120px,18svh,170px)!important}
+  .hero-side{bottom:clamp(42px,7svh,64px)!important}
+}
