@@ -203,7 +203,7 @@ if (storyFrame && storySection && window.matchMedia('(pointer: fine)').matches) 
     const rect = storySection.getBoundingClientRect();
     const x = (event.clientX - rect.left) / rect.width - 0.5;
     const y = (event.clientY - rect.top) / rect.height - 0.5;
-    storyFrame.style.transform = `translate(${x * 12}px, ${y * 12}px) rotate(${5 + x * 3}deg)`;
+    storyFrame.style.transform = `translate(${x * 6}px, ${y * 6}px)`;
   }, { passive: true });
   storySection.addEventListener('pointerleave', () => { storyFrame.style.transform = ''; });
 }
