@@ -439,3 +439,10 @@ body{background:#a9340b}
 .manifesto-caption{color:#ffe2bf}
 .hero-fade{background:linear-gradient(to bottom,transparent 0%,rgba(169,52,11,.08) 28%,rgba(169,52,11,.55) 70%,#a9340b 100%)}
 @media(max-width:760px){.hero-fade{background:linear-gradient(to bottom,transparent 0%,rgba(169,52,11,.08) 24%,rgba(169,52,11,.6) 70%,#a9340b 100%)}}
+
+/* Continue the hero's exact orange canvas into the opening section. */
+.hero{background:radial-gradient(ellipse at 78% 83%,rgba(247,116,38,.45),transparent 32%),radial-gradient(ellipse at 14% 18%,rgba(239,85,12,.6),transparent 45%),linear-gradient(120deg,#a9340b 0%,#8f2d0a 45%,#b6400d 100%)}
+.hero-fade{background:linear-gradient(to bottom,transparent 0%,rgba(143,45,10,.1) 30%,rgba(143,45,10,.55) 72%,#8f2d0a 100%)}
+.manifesto,.scene-opening{background:linear-gradient(120deg,#a9340b 0%,#8f2d0a 45%,#b6400d 100%);color:#fff8ef}
+.manifesto:before,.scene-opening:before{background:radial-gradient(ellipse at 78% 83%,rgba(247,116,38,.45),transparent 32%),radial-gradient(ellipse at 14% 18%,rgba(239,85,12,.6),transparent 45%),linear-gradient(120deg,#a9340b 0%,#8f2d0a 45%,#b6400d 100%);opacity:1}
+@media(max-width:760px){.hero-fade{background:linear-gradient(to bottom,transparent 0%,rgba(143,45,10,.12) 28%,rgba(143,45,10,.62) 72%,#8f2d0a 100%)}}
