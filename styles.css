@@ -548,3 +548,22 @@ body{background:#211c1a}
  .process-heading h2,.services-heading h2,.work-heading h2{font-size:clamp(42px,9vw,66px)}
  .contact h2{font-size:clamp(56px,11vw,82px)}
 }
+
+/* Orange and ivory define the page; reserve neutral dark tones for the footage itself. */
+:root{--paper:#fffaf4;--ink:#241d19;--muted:#665b54}
+body{background:#fffaf4!important}
+.story,.story-sticky{background:#fffaf4!important;color:#241d19}
+.story-copy h2{color:#241d19}.story-copy h2 em{color:#c44718!important}
+.story-kicker,.story-side-note{color:#ad431f!important}
+.story-copy>p{color:#554a43!important}
+.film-scroll,.film-stage{background:#171717!important}
+.process{background:#fffaf4!important;color:#241d19}
+.process-step,.process-step:nth-child(1),.process-step:nth-child(2),.process-step:nth-child(3){background:#fffaf4!important;box-shadow:none!important}
+.process-heading h2,.process-text h3{color:#241d19!important}
+.process-heading>p,.process-text p{color:#5e534c!important}
+.process-heading .section-kicker,.process-text>span{color:#a83b15!important}
+.services,.work,.instagram-preview{background:#fffaf4!important}
+.contact{background:radial-gradient(circle at 85% 18%,#ffbd72 0,transparent 25%),linear-gradient(125deg,#a9340b 0%,#d9521d 58%,#bd4318 100%)!important}
+.site-footer{background:#8f2d0a!important}
+.reveal{transition-duration:.98s,1.02s,.9s!important}
+@media(max-width:760px){.process-step,.process-step:nth-child(1),.process-step:nth-child(2),.process-step:nth-child(3){background:transparent!important}.story-copy>p{color:#554a43!important}}
