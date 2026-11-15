@@ -255,62 +255,26 @@ if (filmScroll) {
   const filmVideo = filmScroll.querySelector('.film-video');
   const filmTitle = filmScroll.querySelector('.film-chapter h3');
   const filmCopy = filmScroll.querySelector('.film-chapter p');
-  const filmSoundToggle = filmScroll.querySelector('.film-sound-toggle');
-  const mobileClips = [...filmScroll.querySelectorAll('.mobile-film-card video[data-src]')];
-  const mobileSoundToggles = [...filmScroll.querySelectorAll('.mobile-sound-toggle')];
+  const filmSoundToggles = [...filmScroll.querySelectorAll('.film-sound-toggle')];
   let soundEnabled = false;
-  let activeMobileClip = null;
   const mobileLayout = window.matchMedia('(max-width: 760px)');
-  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  function loadMobileClip(clip) {
-    if (!clip.src && clip.dataset.src) {
-      clip.src = clip.dataset.src;
-      clip.load();
-    }
-  }
-  mobileClips.forEach((clip) => clip.addEventListener('loadedmetadata', () => {
-    const frame = clip.closest('.mobile-film-media');
-    if (!frame) return;
-    const portrait = clip.videoHeight > clip.videoWidth;
-    frame.classList.toggle('is-portrait', portrait);
-    if (!portrait && clip.videoWidth && clip.videoHeight) {
-      frame.style.aspectRatio = `${clip.videoWidth} / ${clip.videoHeight}`;
-    }
-  }));
   function updateSoundControls() {
-    if (filmSoundToggle) {
-      filmSoundToggle.setAttribute('aria-pressed', String(soundEnabled));
-      filmSoundToggle.setAttribute('aria-label', soundEnabled ? 'Disattiva l’audio dei video' : 'Attiva l’audio dei video');
-      filmSoundToggle.querySelector('span').textContent = soundEnabled ? 'AUDIO ON' : 'AUDIO OFF';
-      filmSoundToggle.classList.toggle('is-on', soundEnabled);
-    }
-    mobileSoundToggles.forEach((button) => {
+    const label = soundEnabled ? 'Audio on' : 'Audio off';
+    filmSoundToggles.forEach((button) => {
       button.setAttribute('aria-pressed', String(soundEnabled));
       button.setAttribute('aria-label', soundEnabled ? 'Disattiva l’audio dei video' : 'Attiva l’audio dei video');
+      const buttonLabel = button.querySelector('span');
+      if (buttonLabel) buttonLabel.textContent = label;
       button.classList.toggle('is-on', soundEnabled);
     });
   }
-  function setSoundEnabled(enabled, preferredClip = null) {
+  function setSoundEnabled(enabled) {
     soundEnabled = enabled;
-    if (preferredClip) activeMobileClip = preferredClip;
     updateSoundControls();
     filmVideo.muted = !soundEnabled;
-    mobileClips.forEach((clip) => { clip.muted = true; });
-    if (!soundEnabled) return;
-    if (activeMobileClip && mobileLayout.matches) {
-      loadMobileClip(activeMobileClip);
-      activeMobileClip.muted = false;
-      activeMobileClip.play().catch(() => {});
-    } else if (filmVisible && !mobileLayout.matches) {
-      filmVideo.play().catch(() => {});
-    }
+    if (soundEnabled && filmVisible) filmVideo.play().catch(() => {});
   }
-  filmSoundToggle?.addEventListener('click', () => setSoundEnabled(!soundEnabled));
-  mobileSoundToggles.forEach((button) => button.addEventListener('click', (event) => {
-    event.stopPropagation();
-    const clip = button.closest('.mobile-film-media')?.querySelector('video');
-    setSoundEnabled(!soundEnabled, clip);
-  }));
+  filmSoundToggles.forEach((button) => button.addEventListener('click', () => setSoundEnabled(!soundEnabled)));
   updateSoundControls();
   const chapters = [
     { src: 'public/assets/video/web/storia-eventi.mp4', title: 'Le emozioni di un momento.', copy: 'Ci sono attimi che passano in un secondo e meritano di essere rivissuti. Il racconto comincia da lì.' },
@@ -321,11 +285,34 @@ if (filmScroll) {
   let activeChapter = -1;
   let filmVisible = false;
   let pendingResume = null;
-  filmVideo.addEventListener('loadedmetadata', () => {
-    filmStage.classList.toggle('is-portrait', filmVideo.videoHeight > filmVideo.videoWidth);
-  });
+  function sizeFilmFrame() {
+    const videoWidth = filmVideo.videoWidth || 16;
+    const videoHeight = filmVideo.videoHeight || 9;
+    const portrait = videoHeight > videoWidth;
+    const ratio = videoWidth / videoHeight;
+    const stageWidth = filmStage.clientWidth || window.innerWidth;
+    const stageHeight = filmStage.clientHeight || window.innerHeight;
+    const mobileCenter = portrait ? stageHeight * .47 : stageHeight * .44;
+    const maxWidth = mobileLayout.matches
+      ? (portrait ? Math.min(stageWidth * .54, stageHeight * .25) : Math.min(stageWidth * .88, 760))
+      : (portrait ? Math.min(stageWidth * .34, 440) : Math.min(stageWidth * .6, 1060));
+    const maxHeight = mobileLayout.matches
+      ? (portrait ? stageHeight * .44 : Math.min(stageWidth * .495, 430))
+      : (portrait ? Math.min(stageHeight * .8, 800) : Math.min(stageHeight * .76, 760));
+    const width = Math.min(maxWidth, maxHeight * ratio);
+    const height = width / ratio;
+    const centerY = mobileLayout.matches ? mobileCenter : stageHeight * .5;
+    filmStage.classList.toggle('is-portrait', portrait);
+    filmStage.style.setProperty('--film-frame-width', `${width}px`);
+    filmStage.style.setProperty('--film-frame-height', `${height}px`);
+    filmStage.style.setProperty('--film-frame-center-y', `${centerY}px`);
+    filmStage.style.setProperty('--film-sound-y', `${centerY + height / 2 + 14}px`);
+  }
+  filmVideo.addEventListener('loadedmetadata', sizeFilmFrame);
+  window.addEventListener('resize', sizeFilmFrame, { passive: true });
+  sizeFilmFrame();
   function updateFilmChapter() {
-    if (!filmVisible || mobileLayout.matches) return;
+    if (!filmVisible) return;
     const rect = filmScroll.getBoundingClientRect();
     const travel = Math.max(1, filmScroll.offsetHeight - window.innerHeight);
     const progress = Math.max(0, Math.min(1, -rect.top / travel));
@@ -357,10 +344,6 @@ if (filmScroll) {
   }
   const filmObserver = new IntersectionObserver(([entry]) => {
     filmVisible = entry.isIntersecting;
-    if (mobileLayout.matches) {
-      filmVideo.pause();
-      return;
-    }
     if (filmVisible) {
       updateFilmChapter();
       filmVideo.play().catch(() => {});
@@ -371,33 +354,6 @@ if (filmScroll) {
   window.addEventListener('scroll', updateFilmChapter, { passive: true });
   window.addEventListener('resize', updateFilmChapter, { passive: true });
   updateFilmChapter();
-
-  if (mobileClips.length) {
-    if (reducedMotion) {
-      mobileClips.forEach(loadMobileClip);
-    } else {
-      const mobileClipObserver = new IntersectionObserver((entries) => {
-        entries.forEach(({ target, isIntersecting }) => {
-          if (isIntersecting) {
-            const clip = target.querySelector('video[data-src]');
-            if (clip) loadMobileClip(clip);
-          }
-        });
-        const mostVisible = mobileClips
-          .map((clip) => ({ clip, rect: clip.closest('.mobile-film-card').getBoundingClientRect() }))
-          .map(({ clip, rect }) => ({ clip, ratio: Math.max(0, Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0)) / Math.max(1, rect.height) }))
-          .sort((a, b) => b.ratio - a.ratio)[0];
-        activeMobileClip = mostVisible?.ratio > 0.25 ? mostVisible.clip : null;
-        mobileClips.forEach((clip) => {
-          if (clip === activeMobileClip && mobileLayout.matches) {
-            clip.muted = !soundEnabled;
-            clip.play().catch(() => {});
-          } else clip.pause();
-        });
-      }, { threshold: [0, 0.25, 0.55, 0.8] });
-      mobileClips.forEach((clip) => mobileClipObserver.observe(clip.closest('.mobile-film-card')));
-    }
-  }
 }
 
 // Privacy controls: optional services are never requested before affirmative consent.
