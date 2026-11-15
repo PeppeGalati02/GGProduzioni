@@ -118,17 +118,16 @@ if (window.matchMedia('(pointer: fine)').matches) {
 }
 
 const touchTrail = document.querySelector('.touch-trail');
-if (touchTrail && window.matchMedia('(pointer: coarse)').matches && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+if (touchTrail && window.matchMedia('(pointer: coarse)').matches) {
   let lastPoint = null;
   let lastStamp = 0;
   const marks = [];
-  window.addEventListener('pointermove', (event) => {
-    if (event.pointerType !== 'touch') return;
+  function leaveTrail(point) {
     const now = performance.now();
-    const point = { x: event.clientX, y: event.clientY };
+    const previous = lastPoint;
     if (lastPoint) {
       const distance = Math.hypot(point.x - lastPoint.x, point.y - lastPoint.y);
-      if (distance < 16 && now - lastStamp < 34) return;
+      if (distance < 10 && now - lastStamp < 24) return;
     }
     lastPoint = point;
     lastStamp = now;
@@ -137,19 +136,35 @@ if (touchTrail && window.matchMedia('(pointer: coarse)').matches && !window.matc
     mark.className = 'touch-trail-mark';
     mark.style.left = `${point.x}px`;
     mark.style.top = `${point.y}px`;
+    const angle = previous ? Math.atan2(point.y - previous.y, point.x - previous.x) : 0;
+    mark.style.setProperty('--trail-angle', `${angle}rad`);
     touchTrail.append(mark);
     marks.push(mark);
-    if (marks.length > 18) marks.shift().remove();
+    if (marks.length > 26) marks.shift().remove();
     window.setTimeout(() => {
       mark.remove();
       const index = marks.indexOf(mark);
       if (index !== -1) marks.splice(index, 1);
-    }, 720);
-  }, { passive: true });
-  window.addEventListener('pointerup', (event) => {
-    if (event.pointerType === 'touch') lastPoint = null;
-  }, { passive: true });
-  window.addEventListener('pointercancel', () => { lastPoint = null; }, { passive: true });
+    }, 1050);
+  }
+  if ('ontouchmove' in window) {
+    window.addEventListener('touchstart', (event) => {
+      const touch = event.touches[0];
+      if (touch) lastPoint = { x: touch.clientX, y: touch.clientY };
+    }, { passive: true });
+    window.addEventListener('touchmove', (event) => {
+      const touch = event.touches[0];
+      if (touch) leaveTrail({ x: touch.clientX, y: touch.clientY });
+    }, { passive: true });
+    window.addEventListener('touchend', () => { lastPoint = null; }, { passive: true });
+    window.addEventListener('touchcancel', () => { lastPoint = null; }, { passive: true });
+  } else {
+    window.addEventListener('pointermove', (event) => {
+      if (event.pointerType === 'touch') leaveTrail({ x: event.clientX, y: event.clientY });
+    }, { passive: true });
+    window.addEventListener('pointerup', () => { lastPoint = null; }, { passive: true });
+    window.addEventListener('pointercancel', () => { lastPoint = null; }, { passive: true });
+  }
 }
 
 if (heroGlow && window.matchMedia('(pointer: fine)').matches) {
