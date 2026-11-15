@@ -466,3 +466,24 @@ body{background:#211c1a}
 .story{min-height:150vh}
 .film-scroll{min-height:150vh}
 @media(max-width:760px){.manifesto,.story,.film-scroll{min-height:0}.process{padding-top:76px;padding-bottom:76px}}
+
+/* A single orange canvas keeps section seams invisible; retain contrast with ivory type. */
+html,body{background:#a9340b!important}
+.hero,.manifesto,.scene-opening,.story,.story-sticky,.film-scroll,.film-stage,.process,.services,.work,.instagram-preview,.contact,.site-footer{background:#a9340b!important}
+.hero{background-image:radial-gradient(ellipse at 78% 83%,rgba(247,116,38,.45),transparent 32%),radial-gradient(ellipse at 14% 18%,rgba(239,85,12,.6),transparent 45%),linear-gradient(120deg,#a9340b 0%,#8f2d0a 45%,#b6400d 100%)!important}
+.manifesto:before,.scene-opening:before{content:none!important}
+.story,.story-sticky,.film-scroll,.film-stage,.process,.services,.work,.instagram-preview,.contact,.site-footer{border:0!important;box-shadow:none!important}
+.story-kicker,.story-side-note,.film-heading>span,.film-count,.film-scroll-cue,.section-kicker,.manifesto-pretitle,.manifesto-copy h2 em,.manifesto-index,.manifesto-caption,.process-heading .section-kicker,.process-text>span,.work-heading h2,.work-intro,.instagram-copy h2,.instagram-description{color:#fff3e7!important}
+.process-heading h2 em,.work-heading h2 em,.work-intro em,.instagram-copy h2 em{color:#ffd66f!important}
+.story-copy>p,.process-heading>p,.process-text p,.services-heading>p,.work-statement>span{color:#f4ddcc!important}
+.story:after,.film-scroll:after,.process:after,.services:after,.work:after,.contact:after{content:none!important;display:none!important}
+.story,.film-scroll,.process,.services,.work,.contact{margin:0!important}
+.manifesto{min-height:118svh!important}
+.story{min-height:125svh!important}
+.film-scroll{height:190svh!important;min-height:0!important}
+.process-step{min-height:clamp(420px,58svh,620px)!important}
+.service-card{border:1px solid #ffffff25}
+.instagram-preview:before{opacity:.12}
+.manifesto-copy h2,.story-copy h2,.process-heading h2,.services-heading h2,.work-heading h2,.contact h2{color:#fff8ef!important}
+.hero-fade{background:linear-gradient(to bottom,transparent 0%,rgba(169,52,11,.12) 30%,rgba(169,52,11,.58) 75%,#a9340b 100%)!important}
+@media(max-width:760px){.manifesto,.story{min-height:0!important}.film-scroll{height:auto!important;min-height:0!important}.process-step{min-height:0!important}.scene-opening .section-kicker{color:#fff3e7!important}}
