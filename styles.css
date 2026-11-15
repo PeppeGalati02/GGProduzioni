@@ -695,3 +695,11 @@ body{background:var(--gg-brown-field)!important}
 .hero{padding-bottom:0!important}
 .manifesto{padding-top:0!important}
 @media(max-width:760px){.manifesto{padding-top:0!important}.site-footer:before{filter:blur(5px)}}
+
+/* Tighten the mobile handoff into footage and lift the hero copy within the viewport. */
+@media(max-width:760px){
+  .hero-copy{transform:translateY(-clamp(18px,4svh,38px))}
+  .film-scroll{padding-top:clamp(24px,4svh,36px)!important;margin-top:0!important}
+  .story-sticky{padding-bottom:clamp(18px,3svh,28px)!important}
+  .mobile-film-list{gap:clamp(34px,6svh,48px)}
+}
