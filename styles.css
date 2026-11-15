@@ -882,3 +882,59 @@ body{background:var(--gg-brown-field)!important}
 @media(prefers-reduced-motion:reduce){
   .film-stage .film-media,.film-stage .film-video{transition:none!important}
 }
+
+/* Shared cinematic entrance and touch/hover feedback for every content card. */
+:is(.service-card,.process-step,.work-statement,.instagram-card,.mobile-film-card){
+  will-change:transform,opacity,filter;
+}
+:is(.service-card,.work-statement,.instagram-card,.mobile-film-card).reveal,
+.process-step:not(.visible){
+  opacity:0!important;
+  transform:translate3d(0,26px,0) scale(.985)!important;
+  filter:blur(3px);
+  transition:opacity .72s ease,transform .9s cubic-bezier(.2,.75,.25,1),filter .8s ease,box-shadow .45s ease!important;
+}
+:is(.service-card,.work-statement,.instagram-card,.mobile-film-card).reveal.visible,
+.process-step.visible{
+  opacity:1!important;
+  transform:translate3d(0,0,0) scale(1)!important;
+  filter:none;
+}
+.service-grid .service-card:nth-child(2){transition-delay:.1s!important}
+.service-grid .service-card:nth-child(3){transition-delay:.18s!important}
+@media(hover:hover) and (pointer:fine){
+  .service-card:hover,.service-card:focus-within,
+  .work-statement:hover,.instagram-card:hover{
+    transform:translate3d(0,-5px,0) scale(1.008)!important;
+  }
+  .service-art,.process-graphic,.ig-grid{transition:filter .45s ease,transform .65s cubic-bezier(.2,.75,.25,1)}
+  .service-card:hover .service-art,.instagram-card:hover .ig-grid{filter:brightness(1.08)}
+  .process-step:hover .process-graphic{filter:brightness(1.06)}
+}
+@media(hover:none),(pointer:coarse){
+  :is(.service-card,.process-step,.work-statement,.instagram-card,.mobile-film-card){
+    -webkit-tap-highlight-color:transparent;
+    transition:opacity .72s ease,transform .9s cubic-bezier(.2,.75,.25,1),filter .8s ease,box-shadow .45s ease!important;
+  }
+  :is(.service-card,.process-step,.work-statement,.instagram-card,.mobile-film-card):active{
+    transform:scale(.992)!important;
+    box-shadow:0 18px 48px #100b0878,0 0 34px #f2703450,0 0 0 1px #ffc18c45!important;
+  }
+}
+@media(max-width:760px){
+  :is(.service-card,.work-statement,.instagram-card,.mobile-film-card).reveal,
+  .process-step:not(.visible){
+    transform:translate3d(0,20px,0) scale(.99)!important;
+    filter:blur(2px);
+    transition-duration:.65s,.78s,.65s,.4s!important;
+  }
+  :is(.service-card,.work-statement,.instagram-card,.mobile-film-card).reveal.visible,
+  .process-step.visible{transform:translate3d(0,0,0) scale(1)!important}
+  .service-grid .service-card:nth-child(2),.service-grid .service-card:nth-child(3){transition-delay:0s!important}
+}
+@media(prefers-reduced-motion:reduce){
+  :is(.service-card,.process-step,.work-statement,.instagram-card,.mobile-film-card),
+  :is(.service-card,.work-statement,.instagram-card,.mobile-film-card).reveal,
+  :is(.service-card,.work-statement,.instagram-card,.mobile-film-card).reveal.visible,
+  .process-step:not(.visible),.process-step.visible{opacity:1!important;transform:none!important;filter:none!important;transition:none!important}
+}

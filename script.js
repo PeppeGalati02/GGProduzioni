@@ -5,9 +5,9 @@ const observer = new IntersectionObserver((entries) => {
       observer.unobserve(entry.target);
     }
   });
-}, { rootMargin: '0px 0px 6% 0px', threshold: 0.01 });
+}, { rootMargin: '0px 0px 12% 0px', threshold: 0.01 });
 
-document.querySelectorAll('.reveal').forEach((element) => observer.observe(element));
+document.querySelectorAll('.reveal, .process-step').forEach((element) => observer.observe(element));
 
 const menuButton = document.querySelector('.menu-toggle');
 const nav = document.querySelector('.nav-links');
