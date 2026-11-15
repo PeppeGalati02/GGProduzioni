@@ -938,3 +938,11 @@ body{background:var(--gg-brown-field)!important}
   :is(.service-card,.work-statement,.instagram-card,.mobile-film-card).reveal.visible,
   .process-step:not(.visible),.process-step.visible{opacity:1!important;transform:none!important;filter:none!important;transition:none!important}
 }
+
+/* Mobile: center video captions and align both Giuseppe photo panels to the left. */
+@media(max-width:760px){
+  .mobile-film-copy{text-align:center!important}
+  .mobile-film-copy h3,.mobile-film-copy p{margin-left:auto!important;margin-right:auto!important;text-align:center!important}
+  .scene-opening .manifesto-art{margin-left:0!important;margin-right:auto!important}
+  .story-visual{align-self:flex-start!important;margin-left:2%!important;margin-right:0!important}
+}
