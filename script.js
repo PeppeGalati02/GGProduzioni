@@ -208,12 +208,9 @@ function updateScrollScenes() {
     const rect = scene.getBoundingClientRect();
     let progress = 0;
     if (scene.classList.contains('process-step')) {
-      const track = scene.closest('.process-track');
-      const trackRect = track.getBoundingClientRect();
-      const travel = Math.max(1, track.offsetHeight - viewportHeight);
-      const overall = Math.max(0, Math.min(1, -trackRect.top / travel));
-      const stepIndex = [...track.querySelectorAll('.process-step')].indexOf(scene);
-      progress = Math.max(0, Math.min(1, overall * track.querySelectorAll('.process-step').length - stepIndex));
+      const stepRect = scene.getBoundingClientRect();
+      const revealTravel = Math.max(1, viewportHeight * 0.52);
+      progress = Math.max(0, Math.min(1, (viewportHeight - stepRect.top) / revealTravel));
     } else {
       const section = scene.closest('.manifesto, .story');
       const sectionRect = section.getBoundingClientRect();

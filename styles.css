@@ -600,3 +600,16 @@ body{background:#211c1a!important;color:#fff8ef}
 .work-statement,.instagram-card,.story-frame{box-shadow:0 24px 65px #100b0870,0 0 30px #f270342c,0 0 0 1px #ffb47a24}
 .mobile-film-media{box-shadow:0 16px 38px #100b0870,0 0 26px #f2703435,0 0 0 1px #ffb47a2b!important}
 @media(max-width:760px){.process-step,.process-step:nth-child(1),.process-step:nth-child(2),.process-step:nth-child(3){background:#302723!important}.process-text h3{color:#fff8ef!important}.process-text p{color:#e1d4cc!important}}
+
+/* Hero-inspired light and color on the dark sections; give each card its own warm halo. */
+:root{--dark-canvas:radial-gradient(ellipse at 12% 18%,rgba(222,91,37,.2),transparent 37%),radial-gradient(ellipse at 88% 82%,rgba(242,131,63,.13),transparent 34%),linear-gradient(128deg,#211a18 0%,#30231f 48%,#201a18 100%)}
+body{background:var(--dark-canvas)!important}
+.story{background:var(--dark-canvas)!important}.story-sticky{background:transparent!important}
+.process,.services,.work,.instagram-preview{background:var(--dark-canvas)!important}
+.process-step,.process-step:nth-child(1),.process-step:nth-child(2),.process-step:nth-child(3){background:radial-gradient(ellipse at 12% 12%,rgba(230,104,48,.12),transparent 43%),linear-gradient(138deg,#382c27 0%,#2b221e 58%,#342720 100%)!important}
+.service-card{box-shadow:0 20px 55px #100b0870,0 0 32px #f2703440,0 0 0 1px #ffb47a35!important}
+.work-statement{background:radial-gradient(ellipse at 90% 12%,rgba(229,103,47,.2),transparent 42%),linear-gradient(135deg,#382d27,#29221f)!important;box-shadow:0 24px 65px #100b0870,0 0 34px #f2703440,0 0 0 1px #ffb47a35!important}
+.instagram-card{box-shadow:0 24px 65px #100b0870,0 0 34px #f2703435,0 0 0 1px #ffb47a35!important}
+.story-frame,.mobile-film-media{box-shadow:0 24px 65px #100b0870,0 0 32px #f270343a,0 0 0 1px #ffb47a32!important}
+.service-card:hover,.service-card:focus-within{box-shadow:0 28px 72px #100b0890,0 0 40px #f2703455,0 0 0 1px #ffc18c55!important}
+@media(max-width:760px){.process-step,.process-step:nth-child(1),.process-step:nth-child(2),.process-step:nth-child(3){background:transparent!important}}
