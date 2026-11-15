@@ -375,8 +375,8 @@ if (filmScroll) {
           }
         });
         const mostVisible = mobileClips
-          .map((clip) => ({ clip, ratio: clip.closest('.mobile-film-card').getBoundingClientRect() }))
-          .map(({ clip, ratio }) => ({ clip, ratio: Math.max(0, Math.min(ratio.bottom, window.innerHeight) - Math.max(ratio.top, 0)) / Math.max(1, ratio.height) }))
+          .map((clip) => ({ clip, rect: clip.closest('.mobile-film-card').getBoundingClientRect() }))
+          .map(({ clip, rect }) => ({ clip, ratio: Math.max(0, Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0)) / Math.max(1, rect.height) }))
           .sort((a, b) => b.ratio - a.ratio)[0];
         activeMobileClip = mostVisible?.ratio > 0.25 ? mostVisible.clip : null;
         mobileClips.forEach((clip) => {

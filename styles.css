@@ -381,7 +381,7 @@ body{background:#fffaf4;color:var(--ink)}.site-header{mix-blend-mode:normal}.sit
 @media(max-width:760px){.ig-tile>i.ig-video-mark{width:20px;height:20px;top:7px;right:7px;border-radius:7px}.ig-video-mark svg{width:11px;height:11px}.ig-tab svg{width:18px;height:18px}}
 @media(prefers-reduced-motion:reduce){.ig-tab svg,.ig-video-mark,.ig-profile-buttons>a{transition:none!important}}
 
-/* Video sound is opt-in: browsers require a direct user gesture before audio can play. */
+/* Video sound stays opt-in; the switch follows the clip that is in view. */
 .film-sound-toggle{position:absolute;z-index:5;top:clamp(24px,5vh,52px);right:clamp(24px,6vw,84px);display:flex;align-items:center;gap:8px;padding:11px 15px;border:1px solid #fff7ef66;border-radius:999px;background:#21171388;color:#fff7ef;font:700 9px/1 var(--font);letter-spacing:.12em;backdrop-filter:blur(12px);cursor:pointer;transition:background .25s,border-color .25s,transform .25s,color .25s}
 .film-sound-toggle:hover{transform:translateY(-2px);border-color:#ffd27a;background:#211713c9}
 .film-sound-toggle.is-on{border-color:#ffd27a;background:#f2a04b;color:#271812;box-shadow:0 0 24px #ffbc6355}
@@ -1114,4 +1114,56 @@ body{background:var(--gg-brown-field)!important}
 }
 @media(max-width:760px) and (prefers-reduced-motion:reduce){
   .film-stage .film-media,.film-stage .film-video{transition:none!important}
+}
+
+/* Keep one steady frame for every clip; portrait footage fits inside it without resizing. */
+@media(min-width:761px){
+  .film-stage .film-media,
+  .film-stage.is-portrait .film-media{
+    top:50%!important;
+    right:5%!important;
+    left:auto!important;
+    width:60%!important;
+    height:min(76svh,760px)!important;
+    aspect-ratio:auto!important;
+    padding:7px!important;
+    box-sizing:border-box!important;
+    overflow:hidden!important;
+    border:1.5px solid rgba(255,226,189,.74)!important;
+    border-radius:24px!important;
+    background:radial-gradient(ellipse at 50% 42%,rgba(227,126,68,.32),rgba(54,34,26,.96) 72%)!important;
+    box-shadow:0 22px 56px rgba(12,8,6,.45),0 0 0 5px rgba(255,241,225,.07),0 0 30px rgba(242,112,52,.2)!important;
+    transform:translateY(-50%)!important;
+    transition:box-shadow .55s ease!important;
+    will-change:auto!important;
+  }
+  .film-stage .film-video,
+  .film-stage.is-portrait .film-video{
+    position:absolute!important;
+    inset:7px!important;
+    width:calc(100% - 14px)!important;
+    height:calc(100% - 14px)!important;
+    border-radius:17px!important;
+    object-fit:contain!important;
+    object-position:center!important;
+    background:transparent!important;
+  }
+  .film-stage.is-portrait .film-vignette,
+  .film-stage.is-portrait .film-grain{inset:7px!important;border-radius:17px!important}
+  .film-stage .film-chapter,
+  .film-stage.is-portrait .film-chapter{
+    top:62%!important;
+    bottom:auto!important;
+    left:8%!important;
+    width:25%!important;
+    max-width:360px!important;
+    transform:translateY(-50%)!important;
+  }
+  .film-stage.is-portrait .film-heading{width:24%!important;max-width:340px!important}
+  .film-stage.is-portrait .film-heading h2{font-size:clamp(34px,3.5vw,52px)!important}
+  .film-stage.is-portrait .film-chapter h3{font-size:clamp(20px,2vw,27px)!important}
+}
+@media(max-width:760px){
+  .mobile-film-copy{margin-top:8px!important;padding-top:8px!important}
+  .mobile-film-card .mobile-film-media{margin-bottom:0!important}
 }
