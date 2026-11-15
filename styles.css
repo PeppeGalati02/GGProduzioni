@@ -446,3 +446,12 @@ body{background:#a9340b}
 .manifesto,.scene-opening{background:linear-gradient(120deg,#a9340b 0%,#8f2d0a 45%,#b6400d 100%);color:#fff8ef}
 .manifesto:before,.scene-opening:before{background:radial-gradient(ellipse at 78% 83%,rgba(247,116,38,.45),transparent 32%),radial-gradient(ellipse at 14% 18%,rgba(239,85,12,.6),transparent 45%),linear-gradient(120deg,#a9340b 0%,#8f2d0a 45%,#b6400d 100%);opacity:1}
 @media(max-width:760px){.hero-fade{background:linear-gradient(to bottom,transparent 0%,rgba(143,45,10,.12) 28%,rgba(143,45,10,.62) 72%,#8f2d0a 100%)}}
+
+/* Harmonize section transitions: one warm orange opening, then clean continuous section edges. */
+body{background:#211c1a}
+.hero,.manifesto,.scene-opening{background:radial-gradient(ellipse at 78% 83%,rgba(247,116,38,.45),transparent 32%),radial-gradient(ellipse at 14% 18%,rgba(239,85,12,.6),transparent 45%),linear-gradient(120deg,#a9340b 0%,#8f2d0a 45%,#b6400d 100%)}
+.manifesto{color:#fff8ef}
+.manifesto:before,.scene-opening:before{content:none}
+.hero-fade{background:linear-gradient(to bottom,transparent 0%,rgba(143,45,10,.12) 32%,rgba(143,45,10,.65) 78%,#8f2d0a 100%)}
+.story,.film-scroll,.process,.services,.work,.contact{margin-top:0;border-top:0}
+@media(max-width:760px){.hero-fade{background:linear-gradient(to bottom,transparent 0%,rgba(143,45,10,.12) 30%,rgba(143,45,10,.68) 80%,#8f2d0a 100%)}}
