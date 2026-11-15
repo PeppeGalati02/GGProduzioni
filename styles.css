@@ -414,3 +414,10 @@ body{background:#fffaf4;color:var(--ink)}.site-header{mix-blend-mode:normal}.sit
 .reveal{transition-duration:1.15s,1.2s,1.05s!important;transition-timing-function:ease,cubic-bezier(.16,1,.3,1),ease!important}
 .service-card.reveal{transition-delay:0s!important}
 @media(prefers-reduced-motion:reduce){.reveal{transition-duration:.01ms!important}.hero-fade{background:linear-gradient(to bottom,transparent,#f7f4ef)}}
+
+/* Match the iOS status-bar safe area to the orange hero, and blend cleanly into the next section. */
+html{background:#a9340b}
+body{background:#f5eee7}
+.hero{background-color:#a9340b}
+.hero-fade{height:clamp(260px,42svh,560px);background:linear-gradient(to bottom,transparent 0%,rgba(245,238,231,.035) 28%,rgba(245,238,231,.28) 60%,rgba(245,238,231,.76) 84%,#f5eee7 100%)}
+@media(max-width:760px){.hero-fade{height:clamp(290px,46svh,520px);background:linear-gradient(to bottom,transparent 0%,rgba(245,238,231,.03) 24%,rgba(245,238,231,.3) 58%,rgba(245,238,231,.8) 85%,#f5eee7 100%)}}
