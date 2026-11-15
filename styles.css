@@ -455,3 +455,14 @@ body{background:#211c1a}
 .hero-fade{background:linear-gradient(to bottom,transparent 0%,rgba(143,45,10,.12) 32%,rgba(143,45,10,.65) 78%,#8f2d0a 100%)}
 .story,.film-scroll,.process,.services,.work,.contact{margin-top:0;border-top:0}
 @media(max-width:760px){.hero-fade{background:linear-gradient(to bottom,transparent 0%,rgba(143,45,10,.12) 30%,rgba(143,45,10,.68) 80%,#8f2d0a 100%)}}
+
+/* Improve contrast and remove oversized scroll-story dead zones between sections. */
+.process{background:#35251f;color:#fff8ef;padding-top:clamp(88px,10vw,132px);padding-bottom:clamp(88px,10vw,132px)}
+.process-heading>p,.process-text p{color:#e0d1c7}
+.process-heading .section-kicker,.process-text>span{color:#ffb17f}
+.process-track:before{background:linear-gradient(transparent,#f29a6666 10% 90%,transparent)}
+.process-text h3{color:#fff8ef}
+.manifesto{min-height:150vh}
+.story{min-height:150vh}
+.film-scroll{min-height:150vh}
+@media(max-width:760px){.manifesto,.story,.film-scroll{min-height:0}.process{padding-top:76px;padding-bottom:76px}}
