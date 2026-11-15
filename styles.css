@@ -1299,3 +1299,14 @@ body{background:var(--gg-brown-field)!important}
   .footer-bottom a{padding:7px 9px;font-size:7px}
   .footer-bottom b{width:20px;height:20px}
 }
+
+
+/* Mobile footer spacing: compact, balanced columns and no back-to-top link. */
+@media(max-width:760px){
+  .site-footer{padding:30px 7vw 18px!important}
+  .footer-main{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;gap:24px 16px!important;padding:0 0 22px!important}
+  .footer-brand-block{gap:13px!important}
+  .footer-column{gap:5px!important}
+  .footer-column h2{margin-bottom:4px!important;font-size:8px!important}
+  .footer-bottom{display:flex!important;justify-content:space-between!important;align-items:center!important;flex-wrap:wrap;gap:8px 14px!important;margin-top:0!important;padding:14px 0 0!important;font-size:7px!important}
+}
