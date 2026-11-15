@@ -29,6 +29,23 @@ nav.querySelectorAll('a').forEach((link) => link.addEventListener('click', () =>
 
 document.querySelector('#year').textContent = new Date().getFullYear();
 
+// On phones, turn the portfolio, Instagram preview, and contact prompt into one finale.
+const mobileOutro = document.querySelector('.mobile-outro');
+const instagramCard = document.querySelector('.instagram-card');
+const instagramCardHome = instagramCard?.parentElement;
+const instagramCardAnchor = instagramCard?.nextSibling;
+const mobileOutroQuery = window.matchMedia('(max-width: 760px)');
+function arrangeMobileOutro(event) {
+  if (!mobileOutro || !instagramCard || !instagramCardHome) return;
+  if (event.matches) {
+    mobileOutro.querySelector('.mobile-outro-instagram-card').append(instagramCard);
+  } else if (instagramCard.parentElement !== instagramCardHome) {
+    instagramCardHome.insertBefore(instagramCard, instagramCardAnchor);
+  }
+}
+arrangeMobileOutro(mobileOutroQuery);
+mobileOutroQuery.addEventListener('change', arrangeMobileOutro);
+
 const aura = document.querySelector('.pointer-aura');
 if (aura && window.matchMedia('(pointer: fine)').matches) {
   let pointerX = window.innerWidth / 2;

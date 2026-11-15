@@ -761,6 +761,32 @@ body{background:var(--gg-brown-field)!important}
   .footer-bottom{margin-top:clamp(28px,7vw,44px)!important}
 }
 
+/* Replace three tall mobile endings with one clear, contact-focused finale. */
+.mobile-outro{display:none}
+@media(max-width:760px){
+  .work.section{padding:clamp(60px,14vw,92px) 6vw clamp(54px,12vw,78px)!important}
+  .work>.section-kicker,.work>.work-heading,.work>.work-intro,.work>.work-statement,
+  .instagram-preview,.contact{display:none!important}
+  .mobile-outro{display:grid;gap:clamp(28px,7vw,44px);width:100%;max-width:620px;margin-inline:auto}
+  .mobile-outro-copy{text-align:center}
+  .mobile-outro-kicker{display:block;margin-bottom:18px;color:#ffb17f;font:700 9px/1.4 var(--font);letter-spacing:.2em}
+  .mobile-outro-copy h2{max-width:540px;margin:0 auto 17px;color:#fff8ef;font:800 clamp(34px,9vw,52px)/1.08 var(--font);letter-spacing:-.055em;text-wrap:balance}
+  .mobile-outro-copy h2 em{color:#ffd66f;font-style:normal}
+  .mobile-outro-copy>p{max-width:470px;margin:0 auto;color:#e1d4cc;font:400 13px/1.7 var(--body);text-wrap:pretty}
+  .mobile-outro-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:24px auto 0;max-width:470px}
+  .mobile-outro-actions>a{min-height:48px;padding:0 15px;border-radius:999px;display:flex;align-items:center;justify-content:space-between;gap:8px;text-decoration:none;font:700 11px/1.2 var(--font);transition:transform .25s,box-shadow .25s,background .25s}
+  .mobile-outro-actions>a:active{transform:scale(.98)}
+  .mobile-outro-actions b{font-size:15px}
+  .mobile-outro-instagram{border:1px solid #fa8b50;background:linear-gradient(110deg,#ed7334,#c94419);color:#fffaf4;box-shadow:0 8px 24px #d9512730}
+  .mobile-outro-whatsapp{border:1px solid #ffd66f;background:#ffd66f;color:#492316;box-shadow:0 8px 24px #f3bd4b25}
+  .mobile-outro-instagram-card{width:100%;min-width:0}
+  .mobile-outro-instagram-card .instagram-card{width:100%;max-width:520px;margin:0 auto!important;justify-self:center}
+}
+@media(max-width:390px){
+  .mobile-outro-actions{grid-template-columns:1fr;max-width:280px}
+  .mobile-outro-copy h2{font-size:clamp(32px,9.2vw,40px)}
+}
+
 /* Give each service illustration its own clear breathing room before the copy. */
 .service-card .service-art{margin-bottom:28px!important}
 .service-card-copy{padding-top:8px}
