@@ -117,19 +117,39 @@ if (window.matchMedia('(pointer: fine)').matches) {
   });
 }
 
-const touchPulse = document.querySelector('.touch-pulse');
-if (touchPulse && window.matchMedia('(pointer: coarse)').matches) {
-  let pulseTimer;
-  window.addEventListener('pointerdown', (event) => {
+const touchTrail = document.querySelector('.touch-trail');
+if (touchTrail && window.matchMedia('(pointer: coarse)').matches && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  let lastPoint = null;
+  let lastStamp = 0;
+  const marks = [];
+  window.addEventListener('pointermove', (event) => {
     if (event.pointerType !== 'touch') return;
-    touchPulse.style.left = `${event.clientX}px`;
-    touchPulse.style.top = `${event.clientY}px`;
-    touchPulse.classList.remove('pulse-active');
-    void touchPulse.offsetWidth;
-    touchPulse.classList.add('pulse-active');
-    window.clearTimeout(pulseTimer);
-    pulseTimer = window.setTimeout(() => touchPulse.classList.remove('pulse-active'), 1450);
+    const now = performance.now();
+    const point = { x: event.clientX, y: event.clientY };
+    if (lastPoint) {
+      const distance = Math.hypot(point.x - lastPoint.x, point.y - lastPoint.y);
+      if (distance < 16 && now - lastStamp < 34) return;
+    }
+    lastPoint = point;
+    lastStamp = now;
+
+    const mark = document.createElement('span');
+    mark.className = 'touch-trail-mark';
+    mark.style.left = `${point.x}px`;
+    mark.style.top = `${point.y}px`;
+    touchTrail.append(mark);
+    marks.push(mark);
+    if (marks.length > 18) marks.shift().remove();
+    window.setTimeout(() => {
+      mark.remove();
+      const index = marks.indexOf(mark);
+      if (index !== -1) marks.splice(index, 1);
+    }, 720);
   }, { passive: true });
+  window.addEventListener('pointerup', (event) => {
+    if (event.pointerType === 'touch') lastPoint = null;
+  }, { passive: true });
+  window.addEventListener('pointercancel', () => { lastPoint = null; }, { passive: true });
 }
 
 if (heroGlow && window.matchMedia('(pointer: fine)').matches) {
