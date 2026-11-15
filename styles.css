@@ -1310,3 +1310,20 @@ body{background:var(--gg-brown-field)!important}
   .footer-column h2{margin-bottom:4px!important;font-size:8px!important}
   .footer-bottom{display:flex!important;justify-content:space-between!important;align-items:center!important;flex-wrap:wrap;gap:8px 14px!important;margin-top:0!important;padding:14px 0 0!important;font-size:7px!important}
 }
+
+
+/* Keep the three footer groups on one mobile row. */
+@media(max-width:760px){
+  .footer-main{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:20px 10px!important;padding:0 0 20px!important}
+  .footer-brand-block{grid-column:1/-1!important}
+  .footer-column{min-width:0!important;gap:5px!important}
+  .footer-column h2{margin-bottom:4px!important;font-size:clamp(7px,2.1vw,8px)!important;letter-spacing:.14em!important}
+  .footer-column>a,.cookie-settings-link{max-width:100%;min-height:28px;padding:6px 4px!important;margin-left:-4px!important;font-size:clamp(7px,2.15vw,9px)!important;line-height:1.35!important;overflow-wrap:anywhere}
+  .footer-column>a span{font-size:clamp(7px,1.9vw,8px)!important;overflow-wrap:anywhere}
+}
+@media(max-width:370px){
+  .footer-main{gap:18px 7px!important}
+  .footer-column h2{letter-spacing:.1em!important}
+  .footer-column>a,.cookie-settings-link{font-size:7px!important}
+  .footer-column>a span{font-size:6.5px!important}
+}
