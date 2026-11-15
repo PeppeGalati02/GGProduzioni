@@ -268,6 +268,15 @@ if (filmScroll) {
       clip.load();
     }
   }
+  mobileClips.forEach((clip) => clip.addEventListener('loadedmetadata', () => {
+    const frame = clip.closest('.mobile-film-media');
+    if (!frame) return;
+    const portrait = clip.videoHeight > clip.videoWidth;
+    frame.classList.toggle('is-portrait', portrait);
+    if (!portrait && clip.videoWidth && clip.videoHeight) {
+      frame.style.aspectRatio = `${clip.videoWidth} / ${clip.videoHeight}`;
+    }
+  }));
   function updateSoundControls() {
     if (filmSoundToggle) {
       filmSoundToggle.setAttribute('aria-pressed', String(soundEnabled));

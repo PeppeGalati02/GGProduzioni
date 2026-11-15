@@ -1116,16 +1116,16 @@ body{background:var(--gg-brown-field)!important}
   .film-stage .film-media,.film-stage .film-video{transition:none!important}
 }
 
-/* Keep one steady frame for every clip; portrait footage fits inside it without resizing. */
+/* Keep the film frame aligned to each clip's aspect ratio without a resize animation. */
 @media(min-width:761px){
   .film-stage .film-media,
   .film-stage.is-portrait .film-media{
     top:50%!important;
     right:5%!important;
     left:auto!important;
-    width:60%!important;
-    height:min(76svh,760px)!important;
-    aspect-ratio:auto!important;
+    width:min(60%,1060px,135svh)!important;
+    height:auto!important;
+    aspect-ratio:16/9!important;
     padding:7px!important;
     box-sizing:border-box!important;
     overflow:hidden!important;
@@ -1134,8 +1134,14 @@ body{background:var(--gg-brown-field)!important}
     background:radial-gradient(ellipse at 50% 42%,rgba(227,126,68,.32),rgba(54,34,26,.96) 72%)!important;
     box-shadow:0 22px 56px rgba(12,8,6,.45),0 0 0 5px rgba(255,241,225,.07),0 0 30px rgba(242,112,52,.2)!important;
     transform:translateY(-50%)!important;
-    transition:box-shadow .55s ease!important;
+    transition:none!important;
     will-change:auto!important;
+  }
+  .film-stage.is-portrait .film-media{
+    right:8%!important;
+    width:min(34%,440px,45svh)!important;
+    height:auto!important;
+    aspect-ratio:9/16!important;
   }
   .film-stage .film-video,
   .film-stage.is-portrait .film-video{
@@ -1162,8 +1168,27 @@ body{background:var(--gg-brown-field)!important}
   .film-stage.is-portrait .film-heading{width:24%!important;max-width:340px!important}
   .film-stage.is-portrait .film-heading h2{font-size:clamp(34px,3.5vw,52px)!important}
   .film-stage.is-portrait .film-chapter h3{font-size:clamp(20px,2vw,27px)!important}
+  .story-meta{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:17px}
+  .story-experience{display:inline-flex;align-items:baseline;gap:8px;flex:none;color:#ffcf72}
+  .story-experience b{font:800 clamp(22px,2.4vw,32px)/.9 var(--font);letter-spacing:-.08em}
+  .story-experience small{font:600 7px/1.2 var(--font);letter-spacing:.12em;color:#f2d5bd;white-space:nowrap}
+  .story-copy h2{margin:0 0 30px!important}
 }
 @media(max-width:760px){
   .mobile-film-copy{margin-top:8px!important;padding-top:8px!important}
   .mobile-film-card .mobile-film-media{margin-bottom:0!important}
+  .mobile-film-media{transition:none!important}
+  .mobile-film-media.is-portrait{transition:none!important}
+  .mobile-film-media:not(.is-portrait) video{object-fit:contain!important}
+  .story-meta{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:13px}
+  .story-kicker{max-width:65%;font-size:7px!important;line-height:1.45}
+  .story-experience{display:flex;flex-direction:column;align-items:flex-end;gap:2px;flex:none;color:#ffcf72}
+  .story-experience b{font:800 22px/.9 var(--font);letter-spacing:-.08em}
+  .story-experience small{font:600 5px/1.2 var(--font);letter-spacing:.09em;color:#f2d5bd;white-space:nowrap}
+  .story-copy h2{margin:0 0 17px!important}
+}
+
+@media(min-width:761px){
+  .film-stage.is-portrait .film-heading,
+  .film-stage.is-portrait .film-chapter{width:50%!important;max-width:650px!important}
 }
