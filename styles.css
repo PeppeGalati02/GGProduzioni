@@ -715,3 +715,12 @@ body{background:var(--gg-brown-field)!important}
   .hero{min-height:max(92svh,700px)!important;padding-bottom:clamp(120px,18svh,170px)!important}
   .hero-side{bottom:clamp(42px,7svh,64px)!important}
 }
+
+/* Join the portrait section directly to the video sequence. */
+.story{padding-bottom:0!important}
+.story-sticky{padding-bottom:0!important;margin-bottom:0!important}
+.film-scroll{padding-top:0!important;margin-top:0!important}
+@media(max-width:760px){
+  .story-sticky{padding-bottom:0!important}
+  .film-scroll{padding-top:0!important}
+}
