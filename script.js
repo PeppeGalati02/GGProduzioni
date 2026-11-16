@@ -359,7 +359,7 @@ if (filmScroll) {
 // Privacy controls: optional services are never requested before affirmative consent.
 // Add the real provider IDs here only when the corresponding accounts are configured.
 const PRIVACY_CONFIG = {
-  googleAnalyticsId: '', // e.g. G-XXXXXXXXXX
+  googleAnalyticsId: 'G-TB4VE31LE3'
   metaPixelId: '' // e.g. 123456789012345
 };
 const CONSENT_KEY = 'gg-produzioni-consent-v1';
