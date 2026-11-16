@@ -66,7 +66,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=mobile-footer-columns-20261116" />
+  <link rel="stylesheet" href="styles.css?v=google-reviews-20261116" />
   <link rel="stylesheet" href="consent.css" />
 </head>
 <body>
@@ -210,6 +210,40 @@
       </div>
     </section>
 
+    <section class="google-reviews section" id="recensioni" aria-labelledby="google-reviews-title" data-google-reviews>
+      <div class="google-reviews-copy reveal">
+        <div class="section-kicker"><span>La voce dei clienti</span></div>
+        <p class="google-reviews-overline">ESPERIENZE REALI, RACCONTATE DA CHI LE HA VISSUTE.</p>
+        <h2 id="google-reviews-title">Ogni storia lascia<br />un <em>ricordo.</em></h2>
+        <p class="google-reviews-description">Le recensioni del profilo Google saranno raccolte qui: un modo semplice per conoscere l’esperienza di chi ha già raccontato il proprio progetto con GG Produzioni.</p>
+        <a class="google-reviews-link" data-google-review-cta href="https://www.google.com/maps" target="_blank" rel="noopener noreferrer" hidden>Lascia una recensione su Google <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="google-reviews-panel reveal" aria-live="polite">
+        <div class="google-reviews-summary" data-review-summary hidden>
+          <div class="google-reviews-brand" aria-label="Google Maps" translate="no">Google Maps</div>
+          <div class="google-reviews-rating"><strong data-review-rating></strong><span class="review-stars" data-review-stars aria-hidden="true"></span></div>
+          <p data-review-count></p>
+        </div>
+        <div class="google-review-pending" data-review-pending role="status">
+          <span class="review-pending-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span class="review-pending-label">PROFILO IN ATTESA DI VERIFICA</span>
+          <p>Quando Google renderà disponibile la scheda, qui appariranno automaticamente la valutazione e le recensioni autentiche.</p>
+        </div>
+        <div class="google-review-carousel" data-review-carousel hidden>
+          <div class="google-review-track" data-review-track aria-label="Recensioni Google"></div>
+          <div class="google-review-controls">
+            <span class="google-review-order">Selezione Google · ordinate per pertinenza</span>
+            <div class="google-review-arrows">
+              <button type="button" data-review-prev aria-label="Recensione precedente">←</button>
+              <button type="button" data-review-next aria-label="Recensione successiva">→</button>
+            </div>
+          </div>
+          <p class="google-review-policy">Le recensioni non sono verificate da Google; Google controlla e rimuove i contenuti falsi quando li identifica. <a href="https://support.google.com/contributionpolicy/answer/7400114?hl=it" target="_blank" rel="noopener noreferrer">Scopri le norme sulle recensioni Google</a>.</p>
+        </div>
+        <p class="google-review-error" data-review-error role="status" hidden>Le recensioni Google non sono momentaneamente disponibili. Riprova tra poco.</p>
+      </div>
+    </section>
+
     <section class="contact" id="contatti">
       <div class="contact-glow"></div><div class="contact-rings" aria-hidden="true"><i></i><i></i><i></i></div><div class="section-kicker reveal"><span>Il prossimo capitolo</span></div>
       <div class="contact-main reveal"><p class="eyebrow">Il tuo progetto merita di farsi notare.</p><h2>La prossima<br /><em>storia è tua.</em></h2><a class="contact-cta" href="https://wa.me/393791627645" target="_blank" rel="noopener noreferrer">Raccontami la tua idea su WhatsApp <span>↗</span></a></div>
@@ -226,7 +260,7 @@
     <div class="footer-bottom"><span>© <span id="year"></span> GG Produzioni</span><span>P. IVA 03903780793</span></div>
   </footer>
   <section class="cookie-banner" id="cookie-banner" aria-labelledby="cookie-title" hidden>
-    <div class="cookie-banner-copy"><span class="cookie-eyebrow">LA TUA PRIVACY, LA TUA SCELTA</span><h2 id="cookie-title">Scegli tu cosa attivare.</h2><p>Usiamo solo strumenti necessari al funzionamento. Con il tuo consenso possiamo attivare statistiche, marketing e contenuti esterni come i video YouTube incorporati.</p><a href="privacy.html">Leggi l’informativa privacy e cookie <span>↗</span></a></div>
+    <div class="cookie-banner-copy"><span class="cookie-eyebrow">LA TUA PRIVACY, LA TUA SCELTA</span><h2 id="cookie-title">Scegli tu cosa attivare.</h2><p>Usiamo solo strumenti necessari al funzionamento. Con il tuo consenso possiamo attivare statistiche, marketing e contenuti esterni come YouTube e le recensioni Google Maps.</p><a href="privacy.html">Leggi l’informativa privacy e cookie <span>↗</span></a></div>
     <div class="cookie-banner-actions"><button class="cookie-button cookie-button-quiet" type="button" data-cookie-reject>Rifiuta non necessari</button><button class="cookie-button cookie-button-outline" type="button" data-cookie-customize>Personalizza</button><button class="cookie-button cookie-button-primary" type="button" data-cookie-accept>Accetta tutti</button></div>
   </section>
   <dialog class="cookie-dialog" id="cookie-dialog" aria-labelledby="cookie-dialog-title">
@@ -236,12 +270,12 @@
       <div class="cookie-category"><div><h3>Necessari</h3><p>Memorizzano la scelta privacy e consentono le funzioni essenziali del sito.</p></div><span class="cookie-always">Sempre attivi</span></div>
       <label class="cookie-category" for="consent-analytics"><span><h3>Statistiche — Google Analytics</h3><p>Raccolgono statistiche sull’utilizzo del sito. Il tag si attiva solo con il consenso e dopo aver configurato l’ID Google.</p></span><input id="consent-analytics" type="checkbox" /></label>
       <label class="cookie-category" for="consent-marketing"><span><h3>Marketing — Meta Pixel</h3><p>Misura le visualizzazioni di pagina solo dopo il tuo consenso alla categoria marketing.</p></span><input id="consent-marketing" type="checkbox" /></label>
-      <label class="cookie-category" for="consent-external"><span><h3>Contenuti esterni — YouTube</h3><p>Consente di caricare video YouTube incorporati. La preview Instagram del sito usa contenuti locali; il link al profilo resta disponibile anche senza consenso.</p></span><input id="consent-external" type="checkbox" /></label>
+      <label class="cookie-category" for="consent-external"><span><h3>Contenuti esterni — YouTube e Google Maps</h3><p>Consente di caricare video YouTube e, quando configurata, la valutazione e le recensioni Google Maps. La preview Instagram del sito usa contenuti locali; il link al profilo resta disponibile anche senza consenso.</p></span><input id="consent-external" type="checkbox" /></label>
       <div class="cookie-dialog-actions"><button class="cookie-button cookie-button-quiet" type="button" data-cookie-reject>Rifiuta non necessari</button><button class="cookie-button cookie-button-primary" type="button" data-cookie-save>Salva le preferenze</button></div>
       <a class="cookie-policy-link" href="privacy.html">Informativa completa privacy e cookie <span>↗</span></a>
     </form>
   </dialog>
-  <script src="script.js?v=meta-pixel-consent-20261116"></script>
+  <script src="script.js?v=google-reviews-20261116"></script>
   <div class="pointer-aura" aria-hidden="true"></div>
 </body>
 </html>

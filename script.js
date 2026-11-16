@@ -439,6 +439,185 @@ function enableExternalEmbeds() {
       placeholder.dataset.loaded = 'true';
     }
   });
+  enableGoogleReviews();
+}
+
+// The profile ID and Places API key live in Cloudflare Pages environment variables.
+// The API route stays inert until the profile is verified and those values are set.
+function enableGoogleReviews() {
+  const section = document.querySelector('[data-google-reviews]');
+  if (!section || section.dataset.requestStarted) return;
+  const pending = section.querySelector('[data-review-pending]');
+  const summary = section.querySelector('[data-review-summary]');
+  const carousel = section.querySelector('[data-review-carousel]');
+  const track = section.querySelector('[data-review-track]');
+  const error = section.querySelector('[data-review-error]');
+  const reviewCta = section.querySelector('[data-google-review-cta]');
+  if (!pending || !summary || !carousel || !track || !error) return;
+
+  const formatStars = (rating) => {
+    const stars = document.createElement('span');
+    stars.className = 'review-stars';
+    stars.setAttribute('aria-label', `${Number(rating).toFixed(1)} su 5 stelle`);
+    stars.style.setProperty('--rating-fill', `${Math.max(0, Math.min(5, Number(rating))) / 5 * 100}%`);
+    stars.textContent = '★★★★★';
+    return stars;
+  };
+
+  const renderReview = (review, placeMapUrl) => {
+    const author = review?.authorAttribution || {};
+    const sourceUrl = review?.googleMapsUri;
+    if (!sourceUrl || !author.displayName) return null;
+
+    const card = document.createElement('article');
+    card.className = 'google-review-card';
+    const head = document.createElement('div');
+    head.className = 'google-review-author';
+    if (author.photoUri) {
+      const avatar = document.createElement('img');
+      avatar.src = author.photoUri;
+      avatar.alt = '';
+      avatar.loading = 'lazy';
+      head.append(avatar);
+    } else {
+      const avatar = document.createElement('span');
+      avatar.className = 'google-review-avatar-fallback';
+      avatar.setAttribute('aria-hidden', 'true');
+      avatar.textContent = author.displayName.trim().charAt(0).toLocaleUpperCase('it');
+      head.append(avatar);
+    }
+
+    const authorName = document.createElement(author.uri ? 'a' : 'span');
+    authorName.className = 'google-review-author-name';
+    authorName.textContent = author.displayName;
+    if (author.uri) {
+      authorName.href = author.uri;
+      authorName.target = '_blank';
+      authorName.rel = 'noopener noreferrer';
+    }
+    const date = document.createElement('span');
+    date.className = 'google-review-date';
+    date.textContent = review.relativePublishTimeDescription || '';
+    const authorMeta = document.createElement('span');
+    authorMeta.className = 'google-review-author-meta';
+    authorMeta.append(authorName, date);
+    head.append(authorMeta);
+    head.append(formatStars(review.rating));
+
+    const body = document.createElement('p');
+    body.className = 'google-review-text';
+    body.textContent = review.text?.text || review.originalText?.text || 'Recensione senza testo.';
+    const source = document.createElement('a');
+    source.className = 'google-review-source';
+    source.href = sourceUrl || placeMapUrl;
+    source.target = '_blank';
+    source.rel = 'noopener noreferrer';
+    source.textContent = 'Leggi su Google Maps ↗';
+    card.append(head, body, source);
+    return card;
+  };
+
+  const setUpCarousel = () => {
+    const cards = [...track.children];
+    if (cards.length < 2) {
+      section.querySelector('.google-review-controls')?.classList.add('is-single-review');
+      section.querySelector('[data-review-prev]')?.setAttribute('hidden', '');
+      section.querySelector('[data-review-next]')?.setAttribute('hidden', '');
+      section.querySelector('[data-review-toggle]')?.setAttribute('hidden', '');
+      return;
+    }
+    const scrollToCard = (direction) => {
+      const left = track.scrollLeft;
+      const index = cards.reduce((best, card, candidate) =>
+        Math.abs(card.offsetLeft - left) < Math.abs(cards[best].offsetLeft - left) ? candidate : best, 0);
+      const next = (index + direction + cards.length) % cards.length;
+      track.scrollTo({ left: cards[next].offsetLeft, behavior: 'smooth' });
+    };
+    section.querySelector('[data-review-prev]')?.addEventListener('click', () => scrollToCard(-1));
+    section.querySelector('[data-review-next]')?.addEventListener('click', () => scrollToCard(1));
+
+    const pause = document.createElement('button');
+    pause.type = 'button';
+    pause.className = 'google-review-pause';
+    pause.dataset.reviewToggle = '';
+    pause.setAttribute('aria-pressed', 'false');
+    pause.textContent = 'Pausa';
+    section.querySelector('.google-review-arrows')?.prepend(pause);
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      pause.textContent = 'Scorrimento automatico disattivato';
+      pause.disabled = true;
+      return;
+    }
+
+    let autoPaused = false;
+    const timer = window.setInterval(() => {
+      if (!autoPaused && !document.hidden) scrollToCard(1);
+    }, 7000);
+    pause.addEventListener('click', () => {
+      autoPaused = !autoPaused;
+      pause.setAttribute('aria-pressed', String(autoPaused));
+      pause.textContent = autoPaused ? 'Riprendi' : 'Pausa';
+    });
+    carousel.addEventListener('pointerenter', () => { autoPaused = true; });
+    carousel.addEventListener('pointerleave', () => { autoPaused = pause.getAttribute('aria-pressed') === 'true'; });
+    carousel.addEventListener('focusin', () => { autoPaused = true; });
+    carousel.addEventListener('focusout', (event) => {
+      if (!carousel.contains(event.relatedTarget)) autoPaused = pause.getAttribute('aria-pressed') === 'true';
+    });
+    window.addEventListener('pagehide', () => window.clearInterval(timer), { once: true });
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    if (!entries.some((entry) => entry.isIntersecting)) return;
+    observer.disconnect();
+    section.dataset.requestStarted = 'true';
+    fetch('/api/google-reviews', { headers: { Accept: 'application/json' } })
+      .then((response) => response.ok ? response.json() : Promise.reject(new Error('reviews-unavailable')))
+      .then((data) => {
+        if (data.state === 'pending') return;
+        if (data.state === 'empty') {
+          pending.querySelector('.review-pending-label').textContent = 'LE PRIME RECENSIONI, PRESTO QUI';
+          pending.querySelector('p').textContent = 'Il profilo è collegato. Quando arriveranno recensioni pubbliche, la valutazione e le parole dei clienti compariranno in questa sezione.';
+          if (reviewCta && isGoogleLink(data.reviewUrl)) {
+            reviewCta.href = data.reviewUrl;
+            reviewCta.hidden = false;
+          }
+          return;
+        }
+        if (!Number.isFinite(Number(data.rating)) || !Array.isArray(data.reviews)) throw new Error('reviews-invalid');
+        const mapUrl = typeof data.googleMapsUri === 'string' ? data.googleMapsUri : 'https://www.google.com/maps';
+        const reviewCards = data.reviews.map((review) => renderReview(review, mapUrl)).filter(Boolean);
+        if (!reviewCards.length) return;
+        track.replaceChildren(...reviewCards);
+        section.querySelector('[data-review-rating]').textContent = Number(data.rating).toFixed(1);
+        const overallStars = section.querySelector('[data-review-stars]');
+        overallStars.style.setProperty('--rating-fill', `${Math.max(0, Math.min(5, Number(data.rating))) / 5 * 100}%`);
+        overallStars.textContent = '★★★★★';
+        overallStars.setAttribute('aria-label', `${Number(data.rating).toFixed(1)} su 5 stelle`);
+        section.querySelector('[data-review-count]').textContent = `${Number(data.userRatingCount || 0).toLocaleString('it-IT')} recensioni Google`;
+        summary.hidden = false;
+        pending.hidden = true;
+        carousel.hidden = false;
+        if (reviewCta && isGoogleLink(data.reviewUrl)) {
+          reviewCta.href = data.reviewUrl;
+          reviewCta.hidden = false;
+        }
+        setUpCarousel();
+      })
+      .catch(() => {
+        pending.hidden = true;
+        error.hidden = false;
+      });
+  }, { rootMargin: '140px 0px', threshold: 0.01 });
+  observer.observe(section);
+}
+
+function isGoogleLink(value) {
+  if (typeof value !== 'string') return false;
+  try {
+    const url = new URL(value);
+    return url.protocol === 'https:' && (url.hostname === 'google.com' || url.hostname.endsWith('.google.com') || url.hostname === 'g.page' || url.hostname === 'maps.app.goo.gl');
+  } catch { return false; }
 }
 
 function applyConsent(consent) {
