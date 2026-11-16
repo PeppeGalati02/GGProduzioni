@@ -360,7 +360,7 @@ if (filmScroll) {
 // Add the real provider IDs here only when the corresponding accounts are configured.
 const PRIVACY_CONFIG = {
   googleAnalyticsId: 'G-TB4VE31LE3',
-  metaPixelId: '' // e.g. 123456789012345
+  metaPixelId: '1610886030173120' // e.g. 123456789012345
 };
 const CONSENT_KEY = 'gg-produzioni-consent-v1';
 const cookieBanner = document.querySelector('#cookie-banner');
