@@ -1317,8 +1317,8 @@ body{background:var(--gg-brown-field)!important}
 .google-reviews-link:hover,.google-reviews-link:focus-visible{transform:translateY(-3px);box-shadow:0 15px 35px #db572a55;outline:2px solid #ffd66f;outline-offset:4px}
 .google-reviews-panel{min-height:248px;padding:clamp(18px,2.5vw,26px);border:1px solid #fff2;border-radius:22px;background:linear-gradient(145deg,#ffffff08,#ffffff02),radial-gradient(ellipse at 82% 0%,#dd662a16,transparent 54%),#211b19;box-shadow:0 18px 45px #100b0855,0 0 24px #f2703418;display:flex;flex-direction:column;justify-content:center;gap:15px}
 .google-reviews-summary[hidden],.google-review-pending[hidden],.google-review-carousel[hidden],.google-review-error[hidden],[data-google-review-cta][hidden]{display:none!important}
-.google-review-brand{display:flex;align-items:center;gap:8px;color:#f7f4ef;font:700 10px/1.4 var(--font);letter-spacing:.015em}
-.google-review-brand>span{display:grid;place-items:center;width:22px;height:22px;border-radius:50%;background:#fff;color:#4285f4;font:800 15px/1 Arial,sans-serif}
+.google-review-brand{display:flex;align-items:center;min-height:28px}
+.google-review-brand img{display:block;width:98px;height:18px;object-fit:contain;object-position:left center}
 .google-reviews-summary{display:grid;grid-template-columns:minmax(0,1fr);align-items:center;gap:6px;padding-bottom:14px;border-bottom:1px solid #fff2}
 .google-reviews-rating{display:flex;align-items:center;gap:10px}
 .google-reviews-rating strong{color:#fff8ef;font:800 27px/1 var(--font);letter-spacing:-.06em}
