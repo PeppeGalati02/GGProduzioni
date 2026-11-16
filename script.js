@@ -359,7 +359,7 @@ if (filmScroll) {
 // Privacy controls: optional services are never requested before affirmative consent.
 // Add the real provider IDs here only when the corresponding accounts are configured.
 const PRIVACY_CONFIG = {
-  googleAnalyticsId: 'G-TB4VE31LE3'
+  googleAnalyticsId: 'G-TB4VE31LE3',
   metaPixelId: '' // e.g. 123456789012345
 };
 const CONSENT_KEY = 'gg-produzioni-consent-v1';
@@ -370,6 +370,22 @@ const consentInputs = {
   marketing: document.querySelector('#consent-marketing'),
   external: document.querySelector('#consent-external')
 };
+
+let consentScrollPosition = 0;
+
+function setConsentPending(pending) {
+  if (pending) {
+    if (document.body.classList.contains('cookie-consent-pending')) return;
+    consentScrollPosition = window.scrollY || 0;
+    document.body.classList.add('cookie-consent-pending');
+    document.body.style.top = `-${consentScrollPosition}px`;
+    return;
+  }
+  if (!document.body.classList.contains('cookie-consent-pending')) return;
+  document.body.classList.remove('cookie-consent-pending');
+  document.body.style.removeProperty('top');
+  window.scrollTo(0, consentScrollPosition);
+}
 
 function readConsent() {
   try { return JSON.parse(localStorage.getItem(CONSENT_KEY) || 'null'); }
@@ -439,6 +455,7 @@ function storeConsent(consent) {
   if (revoked) { window.location.reload(); return; }
   cookieBanner.hidden = true;
   if (cookieDialog.open) cookieDialog.close();
+  setConsentPending(false);
   applyConsent(complete);
 }
 
@@ -451,6 +468,7 @@ function openCookiePreferences() {
 if (cookieBanner && cookieDialog) {
   const savedConsent = readConsent();
   cookieBanner.hidden = Boolean(savedConsent);
+  setConsentPending(!savedConsent);
   if (savedConsent) applyConsent(savedConsent);
   document.querySelectorAll('[data-cookie-settings]').forEach((button) => button.addEventListener('click', openCookiePreferences));
   document.querySelector('[data-cookie-customize]')?.addEventListener('click', openCookiePreferences);
